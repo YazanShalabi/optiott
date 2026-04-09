@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "left": "Left",
-        "center": "Center"
+        "left": {
+          "displayName": "Left",
+          "sortOrder": 10
+        },
+        "center": {
+          "displayName": "Center",
+          "sortOrder": 20
+        }
       }
     },
     "ShowIcon": {
@@ -23,8 +29,14 @@
       "editor": "select",
       "sortOrder": 30,
       "choices": {
-        "sm": "Small",
-        "lg": "Large"
+        "sm": {
+          "displayName": "Small",
+          "sortOrder": 10
+        },
+        "lg": {
+          "displayName": "Large",
+          "sortOrder": 20
+        }
       }
     }
   }

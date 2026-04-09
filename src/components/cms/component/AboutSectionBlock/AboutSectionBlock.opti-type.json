@@ -2,48 +2,40 @@
   "key": "AboutSectionBlock",
   "displayName": "About Section Block",
   "description": "The about section with heading, story content, image, and progress bars.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "Heading": {
       "type": "string",
       "displayName": "Heading",
       "localized": true,
       "searchable": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "MainImage": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Main Image",
-      "group": "Content",
       "sortOrder": 20
     },
     "VideoUrl": {
       "type": "string",
       "displayName": "Video URL",
-      "group": "Content",
       "sortOrder": 30
     },
     "StoryTitle": {
       "type": "string",
       "displayName": "Story Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 40
     },
     "StoryParagraphs": {
       "type": "string",
       "displayName": "Story Paragraphs",
       "localized": true,
-      "group": "Content",
       "sortOrder": 50
-    },
-    "ProgressBars": {
-      "type": "contentReferenceList",
-      "displayName": "Progress Bars",
-      "group": "Content",
-      "sortOrder": 60
     }
   }
 }

@@ -2,27 +2,24 @@
   "key": "AwardsBlock",
   "displayName": "Awards Block",
   "description": "A block displaying awards with title, description, and years.",
-  "baseType": "component",
+  "baseType": "_component",
   "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
   "properties": {
     "Title": {
       "type": "string",
       "displayName": "Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "Description": {
       "type": "string",
       "displayName": "Description",
       "localized": true,
-      "group": "Content",
       "sortOrder": 20
     },
     "Years": {
       "type": "string",
       "displayName": "Years",
-      "group": "Content",
       "sortOrder": 30
     }
   }

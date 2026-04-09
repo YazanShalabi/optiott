@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "small": "Small",
-        "medium": "Medium",
-        "large": "Large"
+        "small": {
+          "displayName": "Small",
+          "sortOrder": 10
+        },
+        "medium": {
+          "displayName": "Medium",
+          "sortOrder": 20
+        },
+        "large": {
+          "displayName": "Large",
+          "sortOrder": 30
+        }
       }
     },
     "ShowMetadata": {

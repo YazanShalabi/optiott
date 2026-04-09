@@ -2,33 +2,29 @@
   "key": "ContactPage",
   "displayName": "Contact Page",
   "description": "The contact us page with form and contact details.",
-  "baseType": "page",
+  "baseType": "_page",
   "properties": {
     "MetaTitle": {
       "type": "string",
       "displayName": "Meta Title",
       "localized": true,
-      "group": "SEO",
       "sortOrder": 10
     },
     "MetaDescription": {
       "type": "string",
       "displayName": "Meta Description",
       "localized": true,
-      "group": "SEO",
       "sortOrder": 20
     },
     "BreadcrumbTitle": {
       "type": "string",
       "displayName": "Breadcrumb Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 30
     },
     "BreadcrumbImage": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Breadcrumb Image",
-      "group": "Content",
       "sortOrder": 40
     }
   }

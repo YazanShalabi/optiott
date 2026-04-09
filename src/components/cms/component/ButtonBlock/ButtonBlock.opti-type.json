@@ -2,32 +2,31 @@
   "key": "ButtonBlock",
   "displayName": "Button Block",
   "description": "A reusable button component with label, URL, style, and optional icon.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "Label": {
       "type": "string",
       "displayName": "Label",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "Url": {
       "type": "string",
       "displayName": "URL",
-      "group": "Content",
       "sortOrder": 20
     },
     "Style": {
       "type": "string",
       "displayName": "Style",
-      "group": "Content",
       "sortOrder": 30
     },
     "Icon": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Icon",
-      "group": "Content",
       "sortOrder": 40
     }
   }

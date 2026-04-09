@@ -2,20 +2,10 @@
   "key": "PricingTabsBlock",
   "displayName": "Pricing Tabs Block",
   "description": "A tabbed pricing section with monthly and yearly plan options.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
-  "properties": {
-    "MonthlyPlans": {
-      "type": "contentReferenceList",
-      "displayName": "Monthly Plans",
-      "group": "Content",
-      "sortOrder": 10
-    },
-    "YearlyPlans": {
-      "type": "contentReferenceList",
-      "displayName": "Yearly Plans",
-      "group": "Content",
-      "sortOrder": 20
-    }
-  }
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
+  "properties": {}
 }

@@ -2,34 +2,33 @@
   "key": "NewsletterBlock",
   "displayName": "Newsletter Block",
   "description": "A newsletter signup section with title, description, and subscribe input.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "Title": {
       "type": "string",
       "displayName": "Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "Description": {
       "type": "string",
       "displayName": "Description",
       "localized": true,
-      "group": "Content",
       "sortOrder": 20
     },
     "Placeholder": {
       "type": "string",
       "displayName": "Placeholder",
       "localized": true,
-      "group": "Content",
       "sortOrder": 30
     },
     "ButtonIcon": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Button Icon",
-      "group": "Content",
       "sortOrder": 40
     }
   }

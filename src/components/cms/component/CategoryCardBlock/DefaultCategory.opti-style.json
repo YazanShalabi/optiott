@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "landscape": "Landscape",
-        "portrait": "Portrait",
-        "square": "Square"
+        "landscape": {
+          "displayName": "Landscape",
+          "sortOrder": 10
+        },
+        "portrait": {
+          "displayName": "Portrait",
+          "sortOrder": 20
+        },
+        "square": {
+          "displayName": "Square",
+          "sortOrder": 30
+        }
       }
     },
     "OverlayPosition": {
@@ -19,8 +28,14 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "bottom": "Bottom",
-        "center": "Center"
+        "bottom": {
+          "displayName": "Bottom",
+          "sortOrder": 10
+        },
+        "center": {
+          "displayName": "Center",
+          "sortOrder": 20
+        }
       }
     }
   }

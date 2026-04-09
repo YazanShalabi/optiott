@@ -2,60 +2,52 @@
   "key": "PricingCardBlock",
   "displayName": "Pricing Card Block",
   "description": "A pricing plan card with plan details, price, and action buttons.",
-  "baseType": "component",
+  "baseType": "_component",
   "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
   "properties": {
     "PlanName": {
       "type": "string",
       "displayName": "Plan Name",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "Description": {
       "type": "string",
       "displayName": "Description",
       "localized": true,
-      "group": "Content",
       "sortOrder": 20
     },
     "Price": {
       "type": "string",
       "displayName": "Price",
-      "group": "Content",
       "sortOrder": 30
     },
     "PricePeriod": {
       "type": "string",
       "displayName": "Price Period",
       "localized": true,
-      "group": "Content",
       "sortOrder": 40
     },
     "TrialButtonText": {
       "type": "string",
       "displayName": "Trial Button Text",
       "localized": true,
-      "group": "Content",
       "sortOrder": 50
     },
     "TrialButtonLink": {
       "type": "string",
       "displayName": "Trial Button Link",
-      "group": "Content",
       "sortOrder": 60
     },
     "ChooseButtonText": {
       "type": "string",
       "displayName": "Choose Button Text",
       "localized": true,
-      "group": "Content",
       "sortOrder": 70
     },
     "ChooseButtonLink": {
       "type": "string",
       "displayName": "Choose Button Link",
-      "group": "Content",
       "sortOrder": 80
     }
   }

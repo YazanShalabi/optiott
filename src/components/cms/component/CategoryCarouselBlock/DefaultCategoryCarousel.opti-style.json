@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "3": "3",
-        "4": "4",
-        "5": "5"
+        "3": {
+          "displayName": "3",
+          "sortOrder": 10
+        },
+        "4": {
+          "displayName": "4",
+          "sortOrder": 20
+        },
+        "5": {
+          "displayName": "5",
+          "sortOrder": 30
+        }
       }
     },
     "ShowNavigation": {

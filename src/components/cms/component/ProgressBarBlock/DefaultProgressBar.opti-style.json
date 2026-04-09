@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "primary": "Primary",
-        "secondary": "Secondary",
-        "accent": "Accent"
+        "primary": {
+          "displayName": "Primary",
+          "sortOrder": 10
+        },
+        "secondary": {
+          "displayName": "Secondary",
+          "sortOrder": 20
+        },
+        "accent": {
+          "displayName": "Accent",
+          "sortOrder": 30
+        }
       }
     },
     "Animated": {

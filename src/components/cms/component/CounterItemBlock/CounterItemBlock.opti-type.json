@@ -2,26 +2,23 @@
   "key": "CounterItemBlock",
   "displayName": "Counter Item Block",
   "description": "A single counter item displaying a number with suffix and label.",
-  "baseType": "component",
+  "baseType": "_component",
   "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
   "properties": {
     "Number": {
       "type": "integer",
       "displayName": "Number",
-      "group": "Content",
       "sortOrder": 10
     },
     "Suffix": {
       "type": "string",
       "displayName": "Suffix",
-      "group": "Content",
       "sortOrder": 20
     },
     "Label": {
       "type": "string",
       "displayName": "Label",
       "localized": true,
-      "group": "Content",
       "sortOrder": 30
     }
   }

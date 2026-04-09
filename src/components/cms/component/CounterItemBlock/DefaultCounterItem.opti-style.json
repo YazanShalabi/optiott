@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "small": "Small",
-        "large": "Large"
+        "small": {
+          "displayName": "Small",
+          "sortOrder": 10
+        },
+        "large": {
+          "displayName": "Large",
+          "sortOrder": 20
+        }
       }
     },
     "Animated": {

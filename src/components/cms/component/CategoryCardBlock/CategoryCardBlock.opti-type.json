@@ -2,33 +2,32 @@
   "key": "CategoryCardBlock",
   "displayName": "Category Card Block",
   "description": "A card representing a content category with image and link.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "Image": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Image",
-      "group": "Content",
       "sortOrder": 10
     },
     "Subtitle": {
       "type": "string",
       "displayName": "Subtitle",
       "localized": true,
-      "group": "Content",
       "sortOrder": 20
     },
     "Title": {
       "type": "string",
       "displayName": "Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 30
     },
     "LinkToPage": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Link to Page",
-      "group": "Content",
       "sortOrder": 40
     }
   }

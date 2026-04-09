@@ -14,8 +14,14 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "dark": "Dark",
-        "accent": "Accent"
+        "dark": {
+          "displayName": "Dark",
+          "sortOrder": 10
+        },
+        "accent": {
+          "displayName": "Accent",
+          "sortOrder": 20
+        }
       }
     }
   }

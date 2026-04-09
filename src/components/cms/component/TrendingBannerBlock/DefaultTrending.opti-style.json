@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "split": "Split",
-        "stacked": "Stacked"
+        "split": {
+          "displayName": "Split",
+          "sortOrder": 10
+        },
+        "stacked": {
+          "displayName": "Stacked",
+          "sortOrder": 20
+        }
       }
     },
     "ColorScheme": {
@@ -18,8 +24,14 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "dark": "Dark",
-        "branded": "Branded"
+        "dark": {
+          "displayName": "Dark",
+          "sortOrder": 10
+        },
+        "branded": {
+          "displayName": "Branded",
+          "sortOrder": 20
+        }
       }
     }
   }

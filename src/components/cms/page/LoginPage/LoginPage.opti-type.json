@@ -2,32 +2,28 @@
   "key": "LoginPage",
   "displayName": "Login Page",
   "description": "The login and registration page.",
-  "baseType": "page",
+  "baseType": "_page",
   "properties": {
     "MetaTitle": {
       "type": "string",
       "displayName": "Meta Title",
       "localized": true,
-      "group": "SEO",
       "sortOrder": 10
     },
     "BackgroundImage": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Background Image",
-      "group": "Content",
       "sortOrder": 20
     },
     "FormTitle": {
       "type": "string",
       "displayName": "Form Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 30
     },
     "ShowRegisterTab": {
       "type": "boolean",
       "displayName": "Show Register Tab",
-      "group": "Content",
       "sortOrder": 40
     }
   }

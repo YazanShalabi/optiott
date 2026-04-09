@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "image-left": "Image Left",
-        "image-right": "Image Right"
+        "imageLeft": {
+          "displayName": "Image Left",
+          "sortOrder": 10
+        },
+        "imageRight": {
+          "displayName": "Image Right",
+          "sortOrder": 20
+        }
       }
     },
     "ShowVideo": {

@@ -2,14 +2,10 @@
   "key": "CounterSectionBlock",
   "displayName": "Counter Section Block",
   "description": "A section displaying multiple counter items.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
-  "properties": {
-    "Counters": {
-      "type": "contentReferenceList",
-      "displayName": "Counters",
-      "group": "Content",
-      "sortOrder": 10
-    }
-  }
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
+  "properties": {}
 }

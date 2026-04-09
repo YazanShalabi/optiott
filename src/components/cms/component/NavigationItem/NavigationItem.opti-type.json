@@ -2,32 +2,26 @@
   "key": "NavigationItem",
   "displayName": "Navigation Item",
   "description": "A navigation menu item with label, URL, and optional child items.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "Label": {
       "type": "string",
       "displayName": "Label",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "Url": {
       "type": "string",
       "displayName": "URL",
-      "group": "Content",
       "sortOrder": 20
-    },
-    "Children": {
-      "type": "contentReferenceList",
-      "displayName": "Children",
-      "group": "Content",
-      "sortOrder": 30
     },
     "IsActive": {
       "type": "boolean",
       "displayName": "Is Active",
-      "group": "Content",
       "sortOrder": 40
     }
   }

@@ -2,32 +2,26 @@
   "key": "MovieCarouselBlock",
   "displayName": "Movie Carousel Block",
   "description": "A carousel component for displaying a collection of movies.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "SectionTitle": {
       "type": "string",
       "displayName": "Section Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
-    },
-    "Movies": {
-      "type": "contentReferenceList",
-      "displayName": "Movies",
-      "group": "Content",
-      "sortOrder": 20
     },
     "ShowNavArrows": {
       "type": "boolean",
       "displayName": "Show Navigation Arrows",
-      "group": "Content",
       "sortOrder": 30
     },
     "ShowDots": {
       "type": "boolean",
       "displayName": "Show Dots",
-      "group": "Content",
       "sortOrder": 40
     }
   }

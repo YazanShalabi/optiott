@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "slow": "Slow",
-        "medium": "Medium",
-        "fast": "Fast"
+        "slow": {
+          "displayName": "Slow",
+          "sortOrder": 10
+        },
+        "medium": {
+          "displayName": "Medium",
+          "sortOrder": 20
+        },
+        "fast": {
+          "displayName": "Fast",
+          "sortOrder": 30
+        }
       }
     },
     "Grayscale": {

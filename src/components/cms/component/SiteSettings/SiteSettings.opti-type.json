@@ -2,128 +2,92 @@
   "key": "SiteSettings",
   "displayName": "Site Settings",
   "description": "Global site settings including branding, navigation, and footer configuration.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "SiteName": {
       "type": "string",
       "displayName": "Site Name",
-      "group": "Content",
       "sortOrder": 10
     },
     "Logo": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Logo",
-      "group": "Content",
       "sortOrder": 20
     },
     "Favicon": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Favicon",
-      "group": "Content",
       "sortOrder": 30
-    },
-    "MainNavigation": {
-      "type": "contentReferenceList",
-      "displayName": "Main Navigation",
-      "group": "Content",
-      "sortOrder": 40
     },
     "CategoryOptions": {
       "type": "string",
       "displayName": "Category Options",
-      "group": "Content",
       "sortOrder": 50
     },
     "HeaderSubscribeButton": {
       "type": "string",
       "displayName": "Header Subscribe Button",
       "localized": true,
-      "group": "Content",
       "sortOrder": 60
     },
     "HeaderSignInButton": {
       "type": "string",
       "displayName": "Header Sign In Button",
       "localized": true,
-      "group": "Content",
       "sortOrder": 70
     },
     "SearchPlaceholder": {
       "type": "string",
       "displayName": "Search Placeholder",
       "localized": true,
-      "group": "Content",
       "sortOrder": 80
     },
     "OffcanvasDescription": {
       "type": "string",
       "displayName": "Offcanvas Description",
       "localized": true,
-      "group": "Content",
       "sortOrder": 90
     },
     "ContactAddress": {
       "type": "string",
       "displayName": "Contact Address",
-      "group": "Metadata",
       "sortOrder": 100
     },
     "ContactEmail": {
       "type": "string",
       "displayName": "Contact Email",
-      "group": "Metadata",
       "sortOrder": 110
     },
     "ContactHours": {
       "type": "string",
       "displayName": "Contact Hours",
-      "group": "Metadata",
       "sortOrder": 120
     },
     "ContactPhone": {
       "type": "string",
       "displayName": "Contact Phone",
-      "group": "Metadata",
       "sortOrder": 130
-    },
-    "SocialLinks": {
-      "type": "contentReferenceList",
-      "displayName": "Social Links",
-      "group": "Metadata",
-      "sortOrder": 140
-    },
-    "FooterCompanyLinks": {
-      "type": "contentReferenceList",
-      "displayName": "Footer Company Links",
-      "group": "Metadata",
-      "sortOrder": 150
-    },
-    "FooterExploreLinks": {
-      "type": "contentReferenceList",
-      "displayName": "Footer Explore Links",
-      "group": "Metadata",
-      "sortOrder": 160
     },
     "NewsletterTitle": {
       "type": "string",
       "displayName": "Newsletter Title",
       "localized": true,
-      "group": "Metadata",
       "sortOrder": 170
     },
     "NewsletterDescription": {
       "type": "string",
       "displayName": "Newsletter Description",
       "localized": true,
-      "group": "Metadata",
       "sortOrder": 180
     },
     "CopyrightText": {
       "type": "string",
       "displayName": "Copyright Text",
       "localized": true,
-      "group": "Metadata",
       "sortOrder": 190
     }
   }

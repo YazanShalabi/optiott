@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "single-col": "Single Column",
-        "two-col": "Two Column"
+        "singleCol": {
+          "displayName": "Single Column",
+          "sortOrder": 10
+        },
+        "twoCol": {
+          "displayName": "Two Column",
+          "sortOrder": 20
+        }
       }
     },
     "ShowDescription": {

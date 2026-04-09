@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "two-col": "Two Column",
-        "full-width": "Full Width",
-        "single": "Single"
+        "twoCol": {
+          "displayName": "Two Column",
+          "sortOrder": 10
+        },
+        "fullWidth": {
+          "displayName": "Full Width",
+          "sortOrder": 20
+        },
+        "single": {
+          "displayName": "Single",
+          "sortOrder": 30
+        }
       }
     },
     "Overlay": {
@@ -19,9 +28,18 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "dark": "Dark",
-        "gradient": "Gradient",
-        "none": "None"
+        "dark": {
+          "displayName": "Dark",
+          "sortOrder": 10
+        },
+        "gradient": {
+          "displayName": "Gradient",
+          "sortOrder": 20
+        },
+        "none": {
+          "displayName": "None",
+          "sortOrder": 30
+        }
       }
     },
     "Height": {
@@ -29,9 +47,18 @@
       "editor": "select",
       "sortOrder": 30,
       "choices": {
-        "tall": "Tall",
-        "medium": "Medium",
-        "short": "Short"
+        "tall": {
+          "displayName": "Tall",
+          "sortOrder": 10
+        },
+        "medium": {
+          "displayName": "Medium",
+          "sortOrder": 20
+        },
+        "short": {
+          "displayName": "Short",
+          "sortOrder": 30
+        }
       }
     }
   }

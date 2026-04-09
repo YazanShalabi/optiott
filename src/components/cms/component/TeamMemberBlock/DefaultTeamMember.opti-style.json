@@ -14,9 +14,18 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "square": "Square",
-        "rounded": "Rounded",
-        "circle": "Circle"
+        "square": {
+          "displayName": "Square",
+          "sortOrder": 10
+        },
+        "rounded": {
+          "displayName": "Rounded",
+          "sortOrder": 20
+        },
+        "circle": {
+          "displayName": "Circle",
+          "sortOrder": 30
+        }
       }
     }
   }

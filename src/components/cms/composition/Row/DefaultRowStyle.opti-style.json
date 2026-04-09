@@ -9,11 +9,26 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "1": "1",
-        "2": "2",
-        "3": "3",
-        "4": "4",
-        "6": "6"
+        "1": {
+          "displayName": "1",
+          "sortOrder": 10
+        },
+        "2": {
+          "displayName": "2",
+          "sortOrder": 20
+        },
+        "3": {
+          "displayName": "3",
+          "sortOrder": 30
+        },
+        "4": {
+          "displayName": "4",
+          "sortOrder": 40
+        },
+        "6": {
+          "displayName": "6",
+          "sortOrder": 50
+        }
       }
     },
     "Gap": {
@@ -21,9 +36,18 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "sm": "Small",
-        "md": "Medium",
-        "lg": "Large"
+        "sm": {
+          "displayName": "Small",
+          "sortOrder": 10
+        },
+        "md": {
+          "displayName": "Medium",
+          "sortOrder": 20
+        },
+        "lg": {
+          "displayName": "Large",
+          "sortOrder": 30
+        }
       }
     },
     "VerticalAlign": {
@@ -31,9 +55,18 @@
       "editor": "select",
       "sortOrder": 30,
       "choices": {
-        "top": "Top",
-        "center": "Center",
-        "bottom": "Bottom"
+        "top": {
+          "displayName": "Top",
+          "sortOrder": 10
+        },
+        "center": {
+          "displayName": "Center",
+          "sortOrder": 20
+        },
+        "bottom": {
+          "displayName": "Bottom",
+          "sortOrder": 30
+        }
       }
     }
   }

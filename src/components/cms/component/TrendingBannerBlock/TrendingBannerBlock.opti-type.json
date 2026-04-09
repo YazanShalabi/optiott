@@ -2,13 +2,15 @@
   "key": "TrendingBannerBlock",
   "displayName": "Trending Banner Block",
   "description": "A banner showcasing trending content with description and play button.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "BackgroundImage": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Background Image",
-      "group": "Content",
       "sortOrder": 10
     },
     "Title": {
@@ -16,33 +18,23 @@
       "displayName": "Title",
       "localized": true,
       "searchable": true,
-      "group": "Content",
       "sortOrder": 20
     },
     "Description": {
       "type": "string",
       "displayName": "Description",
       "localized": true,
-      "group": "Content",
       "sortOrder": 30
     },
     "VideoUrl": {
       "type": "string",
       "displayName": "Video URL",
-      "group": "Content",
       "sortOrder": 40
     },
     "PlayButton": {
       "type": "boolean",
       "displayName": "Play Button",
-      "group": "Content",
       "sortOrder": 50
-    },
-    "TrendingItems": {
-      "type": "contentReferenceList",
-      "displayName": "Trending Items",
-      "group": "Content",
-      "sortOrder": 60
     }
   }
 }

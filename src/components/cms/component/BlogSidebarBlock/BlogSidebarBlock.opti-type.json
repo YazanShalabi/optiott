@@ -2,32 +2,26 @@
   "key": "BlogSidebarBlock",
   "displayName": "Blog Sidebar Block",
   "description": "A blog sidebar with search, categories, recent posts, and tags.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "SearchPlaceholder": {
       "type": "string",
       "displayName": "Search Placeholder",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "Categories": {
       "type": "string",
       "displayName": "Categories",
-      "group": "Content",
       "sortOrder": 20
-    },
-    "RecentPosts": {
-      "type": "contentReferenceList",
-      "displayName": "Recent Posts",
-      "group": "Content",
-      "sortOrder": 30
     },
     "Tags": {
       "type": "string",
       "displayName": "Tags",
-      "group": "Content",
       "sortOrder": 40
     }
   }

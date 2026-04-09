@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "tabs": "Tabs",
-        "toggle": "Toggle"
+        "tabs": {
+          "displayName": "Tabs",
+          "sortOrder": 10
+        },
+        "toggle": {
+          "displayName": "Toggle",
+          "sortOrder": 20
+        }
       }
     },
     "Columns": {
@@ -18,9 +24,18 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "2": "2",
-        "3": "3",
-        "4": "4"
+        "2": {
+          "displayName": "2",
+          "sortOrder": 10
+        },
+        "3": {
+          "displayName": "3",
+          "sortOrder": 20
+        },
+        "4": {
+          "displayName": "4",
+          "sortOrder": 30
+        }
       }
     }
   }

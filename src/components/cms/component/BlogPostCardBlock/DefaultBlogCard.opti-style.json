@@ -19,8 +19,14 @@
       "editor": "select",
       "sortOrder": 30,
       "choices": {
-        "top": "Top",
-        "left": "Left"
+        "top": {
+          "displayName": "Top",
+          "sortOrder": 10
+        },
+        "left": {
+          "displayName": "Left",
+          "sortOrder": 20
+        }
       }
     }
   }

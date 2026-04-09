@@ -2,28 +2,23 @@
   "key": "CategoryCarouselBlock",
   "displayName": "Category Carousel Block",
   "description": "A carousel for browsing content categories.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "SectionTitle": {
       "type": "string",
       "displayName": "Section Title",
       "localized": true,
-      "group": "Content",
       "sortOrder": 10
     },
     "Subtitle": {
       "type": "string",
       "displayName": "Subtitle",
       "localized": true,
-      "group": "Content",
       "sortOrder": 20
-    },
-    "Categories": {
-      "type": "contentReferenceList",
-      "displayName": "Categories",
-      "group": "Content",
-      "sortOrder": 30
     }
   }
 }

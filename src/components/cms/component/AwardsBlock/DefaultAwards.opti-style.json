@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "side-by-side": "Side by Side",
-        "stacked": "Stacked"
+        "sideBySide": {
+          "displayName": "Side by Side",
+          "sortOrder": 10
+        },
+        "stacked": {
+          "displayName": "Stacked",
+          "sortOrder": 20
+        }
       }
     }
   }

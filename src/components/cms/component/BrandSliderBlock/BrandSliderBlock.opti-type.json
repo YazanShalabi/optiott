@@ -2,14 +2,10 @@
   "key": "BrandSliderBlock",
   "displayName": "Brand Slider Block",
   "description": "A slider displaying brand partner logos.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
-  "properties": {
-    "Logos": {
-      "type": "contentReferenceList",
-      "displayName": "Logos",
-      "group": "Content",
-      "sortOrder": 10
-    }
-  }
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
+  "properties": {}
 }

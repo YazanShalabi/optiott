@@ -2,19 +2,17 @@
   "key": "MapEmbedBlock",
   "displayName": "Map Embed Block",
   "description": "An embedded map component with configurable URL and height.",
-  "baseType": "component",
+  "baseType": "_component",
   "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
   "properties": {
     "EmbedUrl": {
       "type": "string",
       "displayName": "Embed URL",
-      "group": "Content",
       "sortOrder": 10
     },
     "Height": {
       "type": "string",
       "displayName": "Height",
-      "group": "Content",
       "sortOrder": 20
     }
   }

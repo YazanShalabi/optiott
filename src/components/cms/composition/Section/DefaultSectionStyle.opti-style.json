@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "transparent": "Transparent",
-        "dark": "Dark",
-        "gradient": "Gradient"
+        "transparent": {
+          "displayName": "Transparent",
+          "sortOrder": 10
+        },
+        "dark": {
+          "displayName": "Dark",
+          "sortOrder": 20
+        },
+        "gradient": {
+          "displayName": "Gradient",
+          "sortOrder": 30
+        }
       }
     },
     "Padding": {
@@ -19,10 +28,22 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "sm": "Small",
-        "md": "Medium",
-        "lg": "Large",
-        "none": "None"
+        "sm": {
+          "displayName": "Small",
+          "sortOrder": 10
+        },
+        "md": {
+          "displayName": "Medium",
+          "sortOrder": 20
+        },
+        "lg": {
+          "displayName": "Large",
+          "sortOrder": 30
+        },
+        "none": {
+          "displayName": "None",
+          "sortOrder": 40
+        }
       }
     },
     "ContainerWidth": {
@@ -30,8 +51,14 @@
       "editor": "select",
       "sortOrder": 30,
       "choices": {
-        "full": "Full",
-        "contained": "Contained"
+        "full": {
+          "displayName": "Full",
+          "sortOrder": 10
+        },
+        "contained": {
+          "displayName": "Contained",
+          "sortOrder": 20
+        }
       }
     }
   }

@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "full-width": "Full Width",
-        "contained": "Contained"
+        "fullWidth": {
+          "displayName": "Full Width",
+          "sortOrder": 10
+        },
+        "contained": {
+          "displayName": "Contained",
+          "sortOrder": 20
+        }
       }
     },
     "ShowCta": {

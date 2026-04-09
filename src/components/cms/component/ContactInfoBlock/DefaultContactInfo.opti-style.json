@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "filled": "Filled",
-        "outline": "Outline"
+        "filled": {
+          "displayName": "Filled",
+          "sortOrder": 10
+        },
+        "outline": {
+          "displayName": "Outline",
+          "sortOrder": 20
+        }
       }
     },
     "Size": {
@@ -18,8 +24,14 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "compact": "Compact",
-        "standard": "Standard"
+        "compact": {
+          "displayName": "Compact",
+          "sortOrder": 10
+        },
+        "standard": {
+          "displayName": "Standard",
+          "sortOrder": 20
+        }
       }
     }
   }

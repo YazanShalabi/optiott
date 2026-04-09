@@ -2,25 +2,25 @@
   "key": "SocialLink",
   "displayName": "Social Link",
   "description": "A social media link with platform name, URL, and icon.",
-  "baseType": "component",
-  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "baseType": "_component",
+  "compositionBehaviors": [
+    "sectionEnabled",
+    "elementEnabled"
+  ],
   "properties": {
     "Platform": {
       "type": "string",
       "displayName": "Platform",
-      "group": "Content",
       "sortOrder": 10
     },
     "Url": {
       "type": "string",
       "displayName": "URL",
-      "group": "Content",
       "sortOrder": 20
     },
     "Icon": {
-      "type": "contentReference",
+      "type": "url",
       "displayName": "Icon",
-      "group": "Content",
       "sortOrder": 30
     }
   }

@@ -9,9 +9,18 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "transparent": "Transparent",
-        "dark": "Dark",
-        "gradient": "Gradient"
+        "transparent": {
+          "displayName": "Transparent",
+          "sortOrder": 10
+        },
+        "dark": {
+          "displayName": "Dark",
+          "sortOrder": 20
+        },
+        "gradient": {
+          "displayName": "Gradient",
+          "sortOrder": 30
+        }
       }
     },
     "Columns": {
@@ -19,9 +28,18 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "2": "2",
-        "3": "3",
-        "4": "4"
+        "2": {
+          "displayName": "2",
+          "sortOrder": 10
+        },
+        "3": {
+          "displayName": "3",
+          "sortOrder": 20
+        },
+        "4": {
+          "displayName": "4",
+          "sortOrder": 30
+        }
       }
     }
   }

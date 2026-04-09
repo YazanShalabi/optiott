@@ -9,8 +9,14 @@
       "editor": "select",
       "sortOrder": 10,
       "choices": {
-        "inline": "Inline",
-        "stacked": "Stacked"
+        "inline": {
+          "displayName": "Inline",
+          "sortOrder": 10
+        },
+        "stacked": {
+          "displayName": "Stacked",
+          "sortOrder": 20
+        }
       }
     },
     "ColorScheme": {
@@ -18,8 +24,14 @@
       "editor": "select",
       "sortOrder": 20,
       "choices": {
-        "dark": "Dark",
-        "light": "Light"
+        "dark": {
+          "displayName": "Dark",
+          "sortOrder": 10
+        },
+        "light": {
+          "displayName": "Light",
+          "sortOrder": 20
+        }
       }
     }
   }
