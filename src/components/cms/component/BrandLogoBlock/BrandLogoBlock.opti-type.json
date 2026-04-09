@@ -1,0 +1,27 @@
+{
+  "key": "BrandLogoBlock",
+  "displayName": "Brand Logo Block",
+  "description": "A brand logo with optional link.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "LogoImage": {
+      "type": "contentReference",
+      "displayName": "Logo Image",
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "AltText": {
+      "type": "string",
+      "displayName": "Alt Text",
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "LinkUrl": {
+      "type": "string",
+      "displayName": "Link URL",
+      "group": "Content",
+      "sortOrder": 30
+    }
+  }
+}

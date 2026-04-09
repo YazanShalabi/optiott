@@ -1,0 +1,10 @@
+fragment PageUrl on _IContent {
+  _metadata {
+    key
+    version
+    url {
+      default
+      hierarchical
+    }
+  }
+}

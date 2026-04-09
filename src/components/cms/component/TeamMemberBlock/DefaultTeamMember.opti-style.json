@@ -1,0 +1,23 @@
+{
+  "key": "DefaultTeamMember",
+  "displayName": "Default Team Member",
+  "contentType": "TeamMemberBlock",
+  "isDefault": true,
+  "settings": {
+    "ShowSocialLinks": {
+      "displayName": "Show Social Links",
+      "editor": "checkbox",
+      "sortOrder": 10
+    },
+    "ImageShape": {
+      "displayName": "Image Shape",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "square": "Square",
+        "rounded": "Rounded",
+        "circle": "Circle"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "key": "DefaultCounterItem",
+  "displayName": "Default Counter Item",
+  "contentType": "CounterItemBlock",
+  "isDefault": true,
+  "settings": {
+    "Size": {
+      "displayName": "Size",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "small": "Small",
+        "large": "Large"
+      }
+    },
+    "Animated": {
+      "displayName": "Animated",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

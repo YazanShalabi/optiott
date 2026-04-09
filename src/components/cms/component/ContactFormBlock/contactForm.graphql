@@ -1,0 +1,6 @@
+fragment ContactForm on ContactFormBlock {
+  title: Title
+  description: Description
+  submitButtonText: SubmitButtonText
+  formEndpoint: FormEndpoint
+}

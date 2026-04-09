@@ -1,0 +1,5 @@
+fragment Awards on AwardsBlock {
+  title: Title
+  description: Description
+  years: Years
+}

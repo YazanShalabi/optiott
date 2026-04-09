@@ -1,0 +1,31 @@
+{
+  "key": "DefaultSectionTitle",
+  "displayName": "Default Section Title",
+  "contentType": "SectionTitleBlock",
+  "isDefault": true,
+  "settings": {
+    "Alignment": {
+      "displayName": "Alignment",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "left": "Left",
+        "center": "Center"
+      }
+    },
+    "ShowIcon": {
+      "displayName": "Show Icon",
+      "editor": "checkbox",
+      "sortOrder": 20
+    },
+    "Size": {
+      "displayName": "Size",
+      "editor": "select",
+      "sortOrder": 30,
+      "choices": {
+        "sm": "Small",
+        "lg": "Large"
+      }
+    }
+  }
+}

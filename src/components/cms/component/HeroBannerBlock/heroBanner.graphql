@@ -1,0 +1,18 @@
+fragment HeroBanner on HeroBannerBlock {
+  title: Title
+  duration: Duration
+  quality: Quality
+  genres: Genres
+  videoUrl: VideoUrl
+  backgroundImage: BackgroundImage {
+    url {
+      default
+    }
+  }
+  linkToDetail: LinkToDetail {
+    url {
+      default
+      hierarchical
+    }
+  }
+}

@@ -1,0 +1,64 @@
+query ExperienceByKey($key: String!, $ver: String, $loc: [Locales!]) {
+  _Experience(
+    where: { _metadata: { key: { eq: $key }, version: { eq: $ver } } }
+    locale: $loc
+    variation: { include: ALL }
+  ) {
+    items {
+      _metadata {
+        key
+        version
+        types
+        displayName
+      }
+      composition {
+        grids: nodes {
+          ... on CompositionStructureNode {
+            key
+            displayName
+            displaySettings {
+              key
+              value
+            }
+            rows: nodes {
+              ... on CompositionStructureNode {
+                key
+                displayName
+                displaySettings {
+                  key
+                  value
+                }
+                columns: nodes {
+                  ... on CompositionStructureNode {
+                    key
+                    displayName
+                    displaySettings {
+                      key
+                      value
+                    }
+                    elements: nodes {
+                      ... on CompositionElementNode {
+                        key
+                        displaySettings {
+                          key
+                          value
+                        }
+                        element {
+                          _metadata {
+                            key
+                            types
+                          }
+                          ...AllComponents
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

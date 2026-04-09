@@ -1,0 +1,48 @@
+{
+  "key": "ErrorPage",
+  "displayName": "Error Page",
+  "description": "A custom error page (404, 500) with messaging and navigation.",
+  "baseType": "page",
+  "properties": {
+    "Title": {
+      "type": "string",
+      "displayName": "Title",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "Subtitle": {
+      "type": "string",
+      "displayName": "Subtitle",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Description": {
+      "type": "string",
+      "displayName": "Description",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "BackgroundImage": {
+      "type": "contentReference",
+      "displayName": "Background Image",
+      "group": "Content",
+      "sortOrder": 40
+    },
+    "ButtonText": {
+      "type": "string",
+      "displayName": "Button Text",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 50
+    },
+    "ButtonLink": {
+      "type": "string",
+      "displayName": "Button Link",
+      "group": "Content",
+      "sortOrder": 60
+    }
+  }
+}

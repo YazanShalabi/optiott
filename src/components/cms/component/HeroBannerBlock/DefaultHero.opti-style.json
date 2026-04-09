@@ -1,0 +1,38 @@
+{
+  "key": "DefaultHero",
+  "displayName": "Default Hero",
+  "contentType": "HeroBannerBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "two-col": "Two Column",
+        "full-width": "Full Width",
+        "single": "Single"
+      }
+    },
+    "Overlay": {
+      "displayName": "Overlay",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "dark": "Dark",
+        "gradient": "Gradient",
+        "none": "None"
+      }
+    },
+    "Height": {
+      "displayName": "Height",
+      "editor": "select",
+      "sortOrder": 30,
+      "choices": {
+        "tall": "Tall",
+        "medium": "Medium",
+        "short": "Short"
+      }
+    }
+  }
+}

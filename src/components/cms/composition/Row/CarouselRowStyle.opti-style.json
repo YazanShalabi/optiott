@@ -1,0 +1,29 @@
+{
+  "key": "CarouselRowStyle",
+  "displayName": "Carousel Row Style",
+  "contentType": "CarouselRow",
+  "isDefault": true,
+  "settings": {
+    "SlidesPerView": {
+      "displayName": "Slides Per View",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5"
+      }
+    },
+    "AutoPlay": {
+      "displayName": "Auto Play",
+      "editor": "checkbox",
+      "sortOrder": 20
+    },
+    "ShowNavigation": {
+      "displayName": "Show Navigation",
+      "editor": "checkbox",
+      "sortOrder": 30
+    }
+  }
+}

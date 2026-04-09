@@ -1,0 +1,11 @@
+fragment TrendingBanner on TrendingBannerBlock {
+  backgroundImage: BackgroundImage {
+    url {
+      default
+    }
+  }
+  title: Title
+  description: Description
+  videoUrl: VideoUrl
+  playButton: PlayButton
+}

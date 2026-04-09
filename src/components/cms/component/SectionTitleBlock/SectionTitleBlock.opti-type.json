@@ -1,0 +1,36 @@
+{
+  "key": "SectionTitleBlock",
+  "displayName": "Section Title Block",
+  "description": "A section title with heading, subtitle, icon, and alignment options.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "Heading": {
+      "type": "string",
+      "displayName": "Heading",
+      "localized": true,
+      "searchable": true,
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "Subtitle": {
+      "type": "string",
+      "displayName": "Subtitle",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Icon": {
+      "type": "contentReference",
+      "displayName": "Icon",
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "Alignment": {
+      "type": "string",
+      "displayName": "Alignment",
+      "group": "Content",
+      "sortOrder": 40
+    }
+  }
+}

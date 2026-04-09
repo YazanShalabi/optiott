@@ -1,0 +1,27 @@
+{
+  "key": "DefaultAbout",
+  "displayName": "Default About",
+  "contentType": "AboutSectionBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "image-left": "Image Left",
+        "image-right": "Image Right"
+      }
+    },
+    "ShowVideo": {
+      "displayName": "Show Video",
+      "editor": "checkbox",
+      "sortOrder": 20
+    },
+    "ShowProgressBars": {
+      "displayName": "Show Progress Bars",
+      "editor": "checkbox",
+      "sortOrder": 30
+    }
+  }
+}

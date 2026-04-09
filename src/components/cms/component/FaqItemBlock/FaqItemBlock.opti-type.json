@@ -1,0 +1,30 @@
+{
+  "key": "FaqItemBlock",
+  "displayName": "FAQ Item Block",
+  "description": "A single FAQ item with question and answer.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "Number": {
+      "type": "string",
+      "displayName": "Number",
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "Question": {
+      "type": "string",
+      "displayName": "Question",
+      "localized": true,
+      "searchable": true,
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Answer": {
+      "type": "string",
+      "displayName": "Answer",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 30
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "key": "DefaultBlogSidebar",
+  "displayName": "Default Blog Sidebar",
+  "contentType": "BlogSidebarBlock",
+  "isDefault": true,
+  "settings": {
+    "ShowSearch": {
+      "displayName": "Show Search",
+      "editor": "checkbox",
+      "sortOrder": 10
+    },
+    "ShowCategories": {
+      "displayName": "Show Categories",
+      "editor": "checkbox",
+      "sortOrder": 20
+    },
+    "ShowRecentPosts": {
+      "displayName": "Show Recent Posts",
+      "editor": "checkbox",
+      "sortOrder": 30
+    },
+    "ShowTags": {
+      "displayName": "Show Tags",
+      "editor": "checkbox",
+      "sortOrder": 40
+    }
+  }
+}

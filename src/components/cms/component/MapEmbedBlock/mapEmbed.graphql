@@ -1,0 +1,4 @@
+fragment MapEmbed on MapEmbedBlock {
+  embedUrl: EmbedUrl
+  height: Height
+}

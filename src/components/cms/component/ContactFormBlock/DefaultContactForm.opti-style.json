@@ -1,0 +1,22 @@
+{
+  "key": "DefaultContactForm",
+  "displayName": "Default Contact Form",
+  "contentType": "ContactFormBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "single-col": "Single Column",
+        "two-col": "Two Column"
+      }
+    },
+    "ShowDescription": {
+      "displayName": "Show Description",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

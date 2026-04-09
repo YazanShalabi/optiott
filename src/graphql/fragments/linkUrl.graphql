@@ -1,0 +1,6 @@
+fragment LinkUrl on ContentModelReference {
+  url {
+    default
+    hierarchical
+  }
+}

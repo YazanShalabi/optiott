@@ -1,0 +1,33 @@
+{
+  "key": "DefaultButton",
+  "displayName": "Default Button",
+  "contentType": "ButtonBlock",
+  "isDefault": true,
+  "settings": {
+    "Variant": {
+      "displayName": "Variant",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "primary": "Primary",
+        "secondary": "Secondary",
+        "ghost": "Ghost"
+      }
+    },
+    "Size": {
+      "displayName": "Size",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
+      }
+    },
+    "FullWidth": {
+      "displayName": "Full Width",
+      "editor": "checkbox",
+      "sortOrder": 30
+    }
+  }
+}

@@ -1,0 +1,10 @@
+fragment SectionTitle on SectionTitleBlock {
+  heading: Heading
+  subtitle: Subtitle
+  icon: Icon {
+    url {
+      default
+    }
+  }
+  alignment: Alignment
+}

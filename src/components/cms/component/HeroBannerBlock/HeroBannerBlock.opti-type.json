@@ -1,0 +1,54 @@
+{
+  "key": "HeroBannerBlock",
+  "displayName": "Hero Banner Block",
+  "description": "A large hero banner with background image, title, and video playback support.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "BackgroundImage": {
+      "type": "contentReference",
+      "displayName": "Background Image",
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "Title": {
+      "type": "string",
+      "displayName": "Title",
+      "localized": true,
+      "searchable": true,
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Duration": {
+      "type": "string",
+      "displayName": "Duration",
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "Quality": {
+      "type": "string",
+      "displayName": "Quality",
+      "group": "Content",
+      "sortOrder": 40
+    },
+    "Genres": {
+      "type": "string",
+      "displayName": "Genres",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 50
+    },
+    "VideoUrl": {
+      "type": "string",
+      "displayName": "Video URL",
+      "group": "Content",
+      "sortOrder": 60
+    },
+    "LinkToDetail": {
+      "type": "contentReference",
+      "displayName": "Link to Detail",
+      "group": "Content",
+      "sortOrder": 70
+    }
+  }
+}

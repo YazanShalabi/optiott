@@ -1,0 +1,7 @@
+{
+  "key": "HomePageExperience",
+  "displayName": "Home Page Experience",
+  "description": "The experience layout for the home page.",
+  "baseType": "experience",
+  "properties": {}
+}

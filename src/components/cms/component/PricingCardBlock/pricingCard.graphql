@@ -1,0 +1,10 @@
+fragment PricingCard on PricingCardBlock {
+  planName: PlanName
+  description: Description
+  price: Price
+  pricePeriod: PricePeriod
+  trialButtonText: TrialButtonText
+  trialButtonLink: TrialButtonLink
+  chooseButtonText: ChooseButtonText
+  chooseButtonLink: ChooseButtonLink
+}

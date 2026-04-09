@@ -1,0 +1,35 @@
+{
+  "key": "PricingPage",
+  "displayName": "Pricing Page",
+  "description": "The pricing plans page with subscription options.",
+  "baseType": "page",
+  "properties": {
+    "MetaTitle": {
+      "type": "string",
+      "displayName": "Meta Title",
+      "localized": true,
+      "group": "SEO",
+      "sortOrder": 10
+    },
+    "MetaDescription": {
+      "type": "string",
+      "displayName": "Meta Description",
+      "localized": true,
+      "group": "SEO",
+      "sortOrder": 20
+    },
+    "BreadcrumbTitle": {
+      "type": "string",
+      "displayName": "Breadcrumb Title",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "BreadcrumbImage": {
+      "type": "contentReference",
+      "displayName": "Breadcrumb Image",
+      "group": "Content",
+      "sortOrder": 40
+    }
+  }
+}

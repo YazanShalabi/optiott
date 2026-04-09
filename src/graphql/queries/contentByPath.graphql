@@ -1,0 +1,25 @@
+query ContentByPath($url: [String!]!, $loc: [Locales!], $siteId: String) {
+  _Content(
+    where: {
+      _or: [
+        { _metadata: { url: { default: { in: $url }, base: { eq: $siteId } } } }
+        { _metadata: { url: { hierarchical: { in: $url }, base: { eq: $siteId } } } }
+      ]
+    }
+    locale: $loc
+    variation: { include: ALL }
+  ) {
+    items {
+      _metadata {
+        key
+        version
+        types
+        displayName
+        url {
+          default
+          hierarchical
+        }
+      }
+    }
+  }
+}

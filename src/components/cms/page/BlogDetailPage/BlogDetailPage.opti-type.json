@@ -1,0 +1,52 @@
+{
+  "key": "BlogDetailPage",
+  "displayName": "Blog Detail Page",
+  "description": "A blog post detail page with full article content.",
+  "baseType": "page",
+  "properties": {
+    "MetaTitle": {
+      "type": "string",
+      "displayName": "Meta Title",
+      "localized": true,
+      "group": "SEO",
+      "sortOrder": 10
+    },
+    "FeaturedImage": {
+      "type": "contentReference",
+      "displayName": "Featured Image",
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Author": {
+      "type": "string",
+      "displayName": "Author",
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "PublishDate": {
+      "type": "date",
+      "displayName": "Publish Date",
+      "group": "Content",
+      "sortOrder": 40
+    },
+    "Body": {
+      "type": "richText",
+      "displayName": "Body",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 50
+    },
+    "Tags": {
+      "type": "string",
+      "displayName": "Tags",
+      "group": "Metadata",
+      "sortOrder": 60
+    },
+    "Category": {
+      "type": "string",
+      "displayName": "Category",
+      "group": "Metadata",
+      "sortOrder": 70
+    }
+  }
+}

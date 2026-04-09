@@ -1,0 +1,5 @@
+fragment MovieCarousel on MovieCarouselBlock {
+  sectionTitle: SectionTitle
+  showNavArrows: ShowNavArrows
+  showDots: ShowDots
+}

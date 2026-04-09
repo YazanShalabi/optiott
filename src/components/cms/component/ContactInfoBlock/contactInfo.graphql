@@ -1,0 +1,6 @@
+fragment ContactInfo on ContactInfoBlock {
+  icon: Icon
+  label: Label
+  value: Value
+  linkUrl: LinkUrl
+}

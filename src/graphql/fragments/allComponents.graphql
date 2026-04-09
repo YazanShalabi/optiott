@@ -1,0 +1,30 @@
+fragment AllComponents on _IComponent {
+  ...HeroBanner
+  ...MovieCard
+  ...MovieCarousel
+  ...TrendingBanner
+  ...HotPicksCard
+  ...CategoryCard
+  ...CategoryCarousel
+  ...UpcomingMovie
+  ...PricingCard
+  ...PricingTabs
+  ...FaqItem
+  ...FaqSection
+  ...TeamMember
+  ...CounterItem
+  ...CounterSection
+  ...Awards
+  ...BrandLogo
+  ...BrandSlider
+  ...AboutSection
+  ...ProgressBar
+  ...ContactInfo
+  ...ContactForm
+  ...MapEmbed
+  ...BlogPostCard
+  ...BlogSidebar
+  ...Newsletter
+  ...Button
+  ...SectionTitle
+}

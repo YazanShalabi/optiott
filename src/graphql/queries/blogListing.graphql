@@ -1,0 +1,29 @@
+query BlogListing($loc: [Locales!], $limit: Int, $skip: Int) {
+  BlogDetailPage(
+    locale: $loc
+    limit: $limit
+    skip: $skip
+    orderBy: { PublishDate: DESC }
+    variation: { include: ALL }
+  ) {
+    items {
+      _metadata {
+        key
+        url {
+          default
+          hierarchical
+        }
+      }
+      metaTitle: MetaTitle
+      featuredImage: FeaturedImage {
+        ...ContentUrl
+      }
+      author: Author
+      publishDate: PublishDate
+      tags: Tags
+      category: Category
+    }
+    cursor
+    total
+  }
+}

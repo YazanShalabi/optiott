@@ -1,0 +1,28 @@
+{
+  "key": "DefaultCounter",
+  "displayName": "Default Counter",
+  "contentType": "CounterSectionBlock",
+  "isDefault": true,
+  "settings": {
+    "Background": {
+      "displayName": "Background",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "transparent": "Transparent",
+        "dark": "Dark",
+        "gradient": "Gradient"
+      }
+    },
+    "Columns": {
+      "displayName": "Columns",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "2": "2",
+        "3": "3",
+        "4": "4"
+      }
+    }
+  }
+}

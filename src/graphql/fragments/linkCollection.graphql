@@ -1,0 +1,4 @@
+fragment LinkCollection on LinkItemNode {
+  label: Label
+  url: Url
+}

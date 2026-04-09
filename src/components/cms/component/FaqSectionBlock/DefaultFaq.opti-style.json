@@ -1,0 +1,22 @@
+{
+  "key": "DefaultFaq",
+  "displayName": "Default FAQ",
+  "contentType": "FaqSectionBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "full-width": "Full Width",
+        "contained": "Contained"
+      }
+    },
+    "ShowCta": {
+      "displayName": "Show CTA",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

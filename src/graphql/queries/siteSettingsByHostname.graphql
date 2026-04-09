@@ -1,0 +1,46 @@
+query SiteSettingsByHostname($hostname: String!, $loc: [Locales!]) {
+  SiteSettings(
+    where: { _metadata: { url: { base: { eq: $hostname } } } }
+    locale: $loc
+    variation: { include: ALL }
+  ) {
+    items {
+      siteName: SiteName
+      logo: Logo {
+        ...ContentUrl
+      }
+      favicon: Favicon {
+        ...ContentUrl
+      }
+      mainNavigation: MainNavigation {
+        label: Label
+        url: Url
+        isActive: IsActive
+        children: Children {
+          label: Label
+          url: Url
+        }
+      }
+      categoryOptions: CategoryOptions
+      searchPlaceholder: SearchPlaceholder
+      offcanvasDescription: OffcanvasDescription
+      contactAddress: ContactAddress
+      contactEmail: ContactEmail
+      contactHours: ContactHours
+      contactPhone: ContactPhone
+      socialLinks: SocialLinks {
+        platform: Platform
+        url: Url
+      }
+      footerCompanyLinks: FooterCompanyLinks {
+        ...LinkCollection
+      }
+      footerExploreLinks: FooterExploreLinks {
+        ...LinkCollection
+      }
+      newsletterTitle: NewsletterTitle
+      newsletterDescription: NewsletterDescription
+      copyrightText: CopyrightText
+    }
+  }
+}

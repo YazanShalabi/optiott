@@ -1,0 +1,48 @@
+{
+  "key": "ComingSoonPage",
+  "displayName": "Coming Soon Page",
+  "description": "A coming soon landing page with countdown and email signup.",
+  "baseType": "page",
+  "properties": {
+    "MetaTitle": {
+      "type": "string",
+      "displayName": "Meta Title",
+      "localized": true,
+      "group": "SEO",
+      "sortOrder": 10
+    },
+    "BackgroundImage": {
+      "type": "contentReference",
+      "displayName": "Background Image",
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "LaunchDate": {
+      "type": "date",
+      "displayName": "Launch Date",
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "Title": {
+      "type": "string",
+      "displayName": "Title",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 40
+    },
+    "Description": {
+      "type": "string",
+      "displayName": "Description",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 50
+    },
+    "EmailPlaceholder": {
+      "type": "string",
+      "displayName": "Email Placeholder",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 60
+    }
+  }
+}

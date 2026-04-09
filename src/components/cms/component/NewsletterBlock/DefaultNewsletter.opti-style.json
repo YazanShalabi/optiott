@@ -1,0 +1,26 @@
+{
+  "key": "DefaultNewsletter",
+  "displayName": "Default Newsletter",
+  "contentType": "NewsletterBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "inline": "Inline",
+        "stacked": "Stacked"
+      }
+    },
+    "ColorScheme": {
+      "displayName": "Color Scheme",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "dark": "Dark",
+        "light": "Light"
+      }
+    }
+  }
+}

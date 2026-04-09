@@ -1,0 +1,26 @@
+{
+  "key": "DefaultContactInfo",
+  "displayName": "Default Contact Info",
+  "contentType": "ContactInfoBlock",
+  "isDefault": true,
+  "settings": {
+    "IconStyle": {
+      "displayName": "Icon Style",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "filled": "Filled",
+        "outline": "Outline"
+      }
+    },
+    "Size": {
+      "displayName": "Size",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "compact": "Compact",
+        "standard": "Standard"
+      }
+    }
+  }
+}

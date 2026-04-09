@@ -1,0 +1,27 @@
+{
+  "key": "DefaultPricingTabs",
+  "displayName": "Default Pricing Tabs",
+  "contentType": "PricingTabsBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "tabs": "Tabs",
+        "toggle": "Toggle"
+      }
+    },
+    "Columns": {
+      "displayName": "Columns",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "2": "2",
+        "3": "3",
+        "4": "4"
+      }
+    }
+  }
+}

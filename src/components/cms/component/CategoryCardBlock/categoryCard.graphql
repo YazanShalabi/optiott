@@ -1,0 +1,15 @@
+fragment CategoryCard on CategoryCardBlock {
+  image: Image {
+    url {
+      default
+    }
+  }
+  subtitle: Subtitle
+  title: Title
+  linkToPage: LinkToPage {
+    url {
+      default
+      hierarchical
+    }
+  }
+}

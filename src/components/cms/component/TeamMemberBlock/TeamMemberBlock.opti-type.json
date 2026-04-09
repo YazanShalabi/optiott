@@ -1,0 +1,54 @@
+{
+  "key": "TeamMemberBlock",
+  "displayName": "Team Member Block",
+  "description": "A team member card with photo, role, and social media links.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "Photo": {
+      "type": "contentReference",
+      "displayName": "Photo",
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "Name": {
+      "type": "string",
+      "displayName": "Name",
+      "localized": true,
+      "searchable": true,
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Role": {
+      "type": "string",
+      "displayName": "Role",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "FacebookUrl": {
+      "type": "string",
+      "displayName": "Facebook URL",
+      "group": "Metadata",
+      "sortOrder": 40
+    },
+    "TwitterUrl": {
+      "type": "string",
+      "displayName": "Twitter URL",
+      "group": "Metadata",
+      "sortOrder": 50
+    },
+    "LinkedInUrl": {
+      "type": "string",
+      "displayName": "LinkedIn URL",
+      "group": "Metadata",
+      "sortOrder": 60
+    },
+    "InstagramUrl": {
+      "type": "string",
+      "displayName": "Instagram URL",
+      "group": "Metadata",
+      "sortOrder": 70
+    }
+  }
+}

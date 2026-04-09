@@ -1,0 +1,17 @@
+{
+  "key": "DefaultAwards",
+  "displayName": "Default Awards",
+  "contentType": "AwardsBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "side-by-side": "Side by Side",
+        "stacked": "Stacked"
+      }
+    }
+  }
+}

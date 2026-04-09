@@ -1,0 +1,23 @@
+{
+  "key": "DefaultMapEmbed",
+  "displayName": "Default Map Embed",
+  "contentType": "MapEmbedBlock",
+  "isDefault": true,
+  "settings": {
+    "Height": {
+      "displayName": "Height",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      }
+    },
+    "Rounded": {
+      "displayName": "Rounded",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

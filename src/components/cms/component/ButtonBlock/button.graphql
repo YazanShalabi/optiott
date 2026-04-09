@@ -1,0 +1,10 @@
+fragment Button on ButtonBlock {
+  label: Label
+  url: Url
+  style: Style
+  icon: Icon {
+    url {
+      default
+    }
+  }
+}

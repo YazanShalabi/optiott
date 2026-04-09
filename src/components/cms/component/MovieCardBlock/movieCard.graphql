@@ -1,0 +1,18 @@
+fragment MovieCard on MovieCardBlock {
+  image: Image {
+    url {
+      default
+    }
+  }
+  title: Title
+  duration: Duration
+  quality: Quality
+  genres: Genres
+  videoUrl: VideoUrl
+  linkToDetail: LinkToDetail {
+    url {
+      default
+      hierarchical
+    }
+  }
+}

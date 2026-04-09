@@ -1,0 +1,27 @@
+{
+  "key": "DefaultCategory",
+  "displayName": "Default Category",
+  "contentType": "CategoryCardBlock",
+  "isDefault": true,
+  "settings": {
+    "AspectRatio": {
+      "displayName": "Aspect Ratio",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "landscape": "Landscape",
+        "portrait": "Portrait",
+        "square": "Square"
+      }
+    },
+    "OverlayPosition": {
+      "displayName": "Overlay Position",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "bottom": "Bottom",
+        "center": "Center"
+      }
+    }
+  }
+}

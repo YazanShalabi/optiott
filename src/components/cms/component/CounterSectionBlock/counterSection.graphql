@@ -1,0 +1,5 @@
+fragment CounterSection on CounterSectionBlock {
+  _metadata {
+    key
+  }
+}

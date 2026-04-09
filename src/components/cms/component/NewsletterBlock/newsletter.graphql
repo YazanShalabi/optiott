@@ -1,0 +1,10 @@
+fragment Newsletter on NewsletterBlock {
+  title: Title
+  description: Description
+  placeholder: Placeholder
+  buttonIcon: ButtonIcon {
+    url {
+      default
+    }
+  }
+}

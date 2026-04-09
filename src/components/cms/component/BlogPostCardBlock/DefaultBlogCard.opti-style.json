@@ -1,0 +1,27 @@
+{
+  "key": "DefaultBlogCard",
+  "displayName": "Default Blog Card",
+  "contentType": "BlogPostCardBlock",
+  "isDefault": true,
+  "settings": {
+    "ShowExcerpt": {
+      "displayName": "Show Excerpt",
+      "editor": "checkbox",
+      "sortOrder": 10
+    },
+    "ShowSocial": {
+      "displayName": "Show Social",
+      "editor": "checkbox",
+      "sortOrder": 20
+    },
+    "ImagePosition": {
+      "displayName": "Image Position",
+      "editor": "select",
+      "sortOrder": 30,
+      "choices": {
+        "top": "Top",
+        "left": "Left"
+      }
+    }
+  }
+}

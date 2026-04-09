@@ -1,0 +1,28 @@
+{
+  "key": "DefaultMovieCard",
+  "displayName": "Default Movie Card",
+  "contentType": "MovieCardBlock",
+  "isDefault": true,
+  "settings": {
+    "Size": {
+      "displayName": "Size",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      }
+    },
+    "ShowMetadata": {
+      "displayName": "Show Metadata",
+      "editor": "checkbox",
+      "sortOrder": 20
+    },
+    "ShowPlayButton": {
+      "displayName": "Show Play Button",
+      "editor": "checkbox",
+      "sortOrder": 30
+    }
+  }
+}

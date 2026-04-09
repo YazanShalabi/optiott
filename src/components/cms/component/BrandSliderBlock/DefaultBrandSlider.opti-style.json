@@ -1,0 +1,23 @@
+{
+  "key": "DefaultBrandSlider",
+  "displayName": "Default Brand Slider",
+  "contentType": "BrandSliderBlock",
+  "isDefault": true,
+  "settings": {
+    "Speed": {
+      "displayName": "Speed",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "slow": "Slow",
+        "medium": "Medium",
+        "fast": "Fast"
+      }
+    },
+    "Grayscale": {
+      "displayName": "Grayscale",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

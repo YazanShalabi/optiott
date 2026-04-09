@@ -1,0 +1,18 @@
+{
+  "key": "DefaultHotPicks",
+  "displayName": "Default Hot Picks",
+  "contentType": "HotPicksCardBlock",
+  "isDefault": true,
+  "settings": {
+    "ShowDescription": {
+      "displayName": "Show Description",
+      "editor": "checkbox",
+      "sortOrder": 10
+    },
+    "ShowRankNumber": {
+      "displayName": "Show Rank Number",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

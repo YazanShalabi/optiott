@@ -1,0 +1,5 @@
+fragment BlogSidebar on BlogSidebarBlock {
+  searchPlaceholder: SearchPlaceholder
+  categories: Categories
+  tags: Tags
+}

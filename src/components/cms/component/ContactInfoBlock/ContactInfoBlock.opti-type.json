@@ -1,0 +1,35 @@
+{
+  "key": "ContactInfoBlock",
+  "displayName": "Contact Info Block",
+  "description": "A contact information item with icon, label, and value.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "Icon": {
+      "type": "string",
+      "displayName": "Icon",
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "Label": {
+      "type": "string",
+      "displayName": "Label",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Value": {
+      "type": "string",
+      "displayName": "Value",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "LinkUrl": {
+      "type": "string",
+      "displayName": "Link URL",
+      "group": "Content",
+      "sortOrder": 40
+    }
+  }
+}

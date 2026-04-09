@@ -1,0 +1,60 @@
+{
+  "key": "HotPicksCardBlock",
+  "displayName": "Hot Picks Card Block",
+  "description": "A ranked card for hot picks with rank number and content details.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "Image": {
+      "type": "contentReference",
+      "displayName": "Image",
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "RankNumber": {
+      "type": "integer",
+      "displayName": "Rank Number",
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Title": {
+      "type": "string",
+      "displayName": "Title",
+      "localized": true,
+      "searchable": true,
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "Description": {
+      "type": "string",
+      "displayName": "Description",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 40
+    },
+    "Duration": {
+      "type": "string",
+      "displayName": "Duration",
+      "group": "Content",
+      "sortOrder": 50
+    },
+    "Quality": {
+      "type": "string",
+      "displayName": "Quality",
+      "group": "Content",
+      "sortOrder": 60
+    },
+    "VideoUrl": {
+      "type": "string",
+      "displayName": "Video URL",
+      "group": "Content",
+      "sortOrder": 70
+    },
+    "LinkToDetail": {
+      "type": "contentReference",
+      "displayName": "Link to Detail",
+      "group": "Content",
+      "sortOrder": 80
+    }
+  }
+}

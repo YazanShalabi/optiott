@@ -1,0 +1,23 @@
+{
+  "key": "DefaultProgressBar",
+  "displayName": "Default Progress Bar",
+  "contentType": "ProgressBarBlock",
+  "isDefault": true,
+  "settings": {
+    "Color": {
+      "displayName": "Color",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "primary": "Primary",
+        "secondary": "Secondary",
+        "accent": "Accent"
+      }
+    },
+    "Animated": {
+      "displayName": "Animated",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

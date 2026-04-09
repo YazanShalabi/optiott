@@ -1,0 +1,7 @@
+{
+  "key": "BlankExperience",
+  "displayName": "Blank Experience",
+  "description": "A blank experience for building custom page layouts.",
+  "baseType": "experience",
+  "properties": {}
+}

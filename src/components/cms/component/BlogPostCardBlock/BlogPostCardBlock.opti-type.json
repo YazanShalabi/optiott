@@ -1,0 +1,48 @@
+{
+  "key": "BlogPostCardBlock",
+  "displayName": "Blog Post Card Block",
+  "description": "A blog post card with featured image, author, date, and excerpt.",
+  "baseType": "component",
+  "compositionBehaviors": ["sectionEnabled", "elementEnabled"],
+  "properties": {
+    "FeaturedImage": {
+      "type": "contentReference",
+      "displayName": "Featured Image",
+      "group": "Content",
+      "sortOrder": 10
+    },
+    "Author": {
+      "type": "string",
+      "displayName": "Author",
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "Date": {
+      "type": "string",
+      "displayName": "Date",
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "Title": {
+      "type": "string",
+      "displayName": "Title",
+      "localized": true,
+      "searchable": true,
+      "group": "Content",
+      "sortOrder": 40
+    },
+    "Excerpt": {
+      "type": "string",
+      "displayName": "Excerpt",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 50
+    },
+    "LinkToDetail": {
+      "type": "contentReference",
+      "displayName": "Link to Detail",
+      "group": "Content",
+      "sortOrder": 60
+    }
+  }
+}

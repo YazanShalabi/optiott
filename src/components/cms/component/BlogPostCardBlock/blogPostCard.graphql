@@ -1,0 +1,17 @@
+fragment BlogPostCard on BlogPostCardBlock {
+  featuredImage: FeaturedImage {
+    url {
+      default
+    }
+  }
+  author: Author
+  date: Date
+  title: Title
+  excerpt: Excerpt
+  linkToDetail: LinkToDetail {
+    url {
+      default
+      hierarchical
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "key": "DefaultRowStyle",
+  "displayName": "Default Row Style",
+  "contentType": "DefaultRow",
+  "isDefault": true,
+  "settings": {
+    "Columns": {
+      "displayName": "Columns",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "6": "6"
+      }
+    },
+    "Gap": {
+      "displayName": "Gap",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
+      }
+    },
+    "VerticalAlign": {
+      "displayName": "Vertical Align",
+      "editor": "select",
+      "sortOrder": 30,
+      "choices": {
+        "top": "Top",
+        "center": "Center",
+        "bottom": "Bottom"
+      }
+    }
+  }
+}

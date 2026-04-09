@@ -1,0 +1,77 @@
+{
+  "key": "ContentDetailPage",
+  "displayName": "Content Detail Page",
+  "description": "A detail page for a movie or content item with full metadata.",
+  "baseType": "page",
+  "properties": {
+    "MetaTitle": {
+      "type": "string",
+      "displayName": "Meta Title",
+      "localized": true,
+      "group": "SEO",
+      "sortOrder": 10
+    },
+    "PosterImage": {
+      "type": "contentReference",
+      "displayName": "Poster Image",
+      "group": "Content",
+      "sortOrder": 20
+    },
+    "TrailerUrl": {
+      "type": "string",
+      "displayName": "Trailer URL",
+      "group": "Content",
+      "sortOrder": 30
+    },
+    "Synopsis": {
+      "type": "string",
+      "displayName": "Synopsis",
+      "localized": true,
+      "group": "Content",
+      "sortOrder": 40
+    },
+    "Duration": {
+      "type": "string",
+      "displayName": "Duration",
+      "group": "Metadata",
+      "sortOrder": 50
+    },
+    "Quality": {
+      "type": "string",
+      "displayName": "Quality",
+      "group": "Metadata",
+      "sortOrder": 60
+    },
+    "Rating": {
+      "type": "string",
+      "displayName": "Rating",
+      "group": "Metadata",
+      "sortOrder": 70
+    },
+    "Genres": {
+      "type": "string",
+      "displayName": "Genres",
+      "localized": true,
+      "group": "Metadata",
+      "sortOrder": 80
+    },
+    "Cast": {
+      "type": "string",
+      "displayName": "Cast",
+      "group": "Metadata",
+      "sortOrder": 90
+    },
+    "ReleaseDate": {
+      "type": "string",
+      "displayName": "Release Date",
+      "group": "Metadata",
+      "sortOrder": 100
+    },
+    "RelatedContent": {
+      "type": "contentReferenceList",
+      "displayName": "Related Content",
+      "group": "Content",
+      "sortOrder": 110
+    }
+  }
+}

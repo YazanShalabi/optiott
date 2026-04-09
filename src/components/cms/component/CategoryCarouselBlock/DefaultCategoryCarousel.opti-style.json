@@ -1,0 +1,23 @@
+{
+  "key": "DefaultCategoryCarousel",
+  "displayName": "Default Category Carousel",
+  "contentType": "CategoryCarouselBlock",
+  "isDefault": true,
+  "settings": {
+    "SlidesPerView": {
+      "displayName": "Slides Per View",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "3": "3",
+        "4": "4",
+        "5": "5"
+      }
+    },
+    "ShowNavigation": {
+      "displayName": "Show Navigation",
+      "editor": "checkbox",
+      "sortOrder": 20
+    }
+  }
+}

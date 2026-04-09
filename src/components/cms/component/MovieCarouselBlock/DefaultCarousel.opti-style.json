@@ -1,0 +1,33 @@
+{
+  "key": "DefaultCarousel",
+  "displayName": "Default Carousel",
+  "contentType": "MovieCarouselBlock",
+  "isDefault": true,
+  "settings": {
+    "SlidesPerView": {
+      "displayName": "Slides Per View",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "3": "3",
+        "4": "4",
+        "5": "5"
+      }
+    },
+    "ShowNavigation": {
+      "displayName": "Show Navigation",
+      "editor": "checkbox",
+      "sortOrder": 20
+    },
+    "ShowPagination": {
+      "displayName": "Show Pagination",
+      "editor": "checkbox",
+      "sortOrder": 30
+    },
+    "AutoPlay": {
+      "displayName": "Auto Play",
+      "editor": "checkbox",
+      "sortOrder": 40
+    }
+  }
+}

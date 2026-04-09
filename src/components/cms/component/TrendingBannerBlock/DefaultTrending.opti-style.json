@@ -1,0 +1,26 @@
+{
+  "key": "DefaultTrending",
+  "displayName": "Default Trending",
+  "contentType": "TrendingBannerBlock",
+  "isDefault": true,
+  "settings": {
+    "Layout": {
+      "displayName": "Layout",
+      "editor": "select",
+      "sortOrder": 10,
+      "choices": {
+        "split": "Split",
+        "stacked": "Stacked"
+      }
+    },
+    "ColorScheme": {
+      "displayName": "Color Scheme",
+      "editor": "select",
+      "sortOrder": 20,
+      "choices": {
+        "dark": "Dark",
+        "branded": "Branded"
+      }
+    }
+  }
+}
