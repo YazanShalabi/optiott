@@ -10,7 +10,11 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { NextRequest } from 'next/server'
-import { fetchExperienceByKey, type ExperienceData } from '@/lib/composition-query'
+import {
+  fetchExperienceByKey,
+  type ExperienceData,
+  type FetchExperienceResult,
+} from '@/lib/composition-query'
 import { renderComposition } from '@/lib/composition-renderer'
 
 export const dynamic = 'force-dynamic'
@@ -67,20 +71,29 @@ function updateTitle(top: string, experience: ExperienceData | null): string {
   )
 }
 
-function renderHeader(experience: ExperienceData | null, key: string): string {
+function renderHeader(
+  experience: ExperienceData | null,
+  key: string,
+  diagnostic: FetchExperienceResult['diagnostic']
+): string {
   const displayName = experience?._metadata?.displayName || '(no experience)'
-  const types = experience?._metadata?.types?.join(', ') || 'Unknown'
+  const primaryType = experience?._metadata?.types?.[0] || diagnostic.source
   const nodeCount = experience?.composition?.nodes?.length ?? 0
+  const errCount = diagnostic.errors?.length ?? 0
+  const line2 = `${nodeCount} sections · ${primaryType}${errCount ? ` · ${errCount} GQL error${errCount === 1 ? '' : 's'}` : ''}`
   return `
-  <div id="optiott-live-preview-badge" style="position:fixed;top:20px;right:20px;z-index:99999;background:#e50914;color:#fff;padding:10px 18px;border-radius:6px;font-size:12px;font-weight:700;letter-spacing:1px;font-family:Arial,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.6);display:flex;align-items:center;gap:10px;max-width:360px;">
+  <div id="optiott-live-preview-badge" style="position:fixed;top:20px;right:20px;z-index:99999;background:#e50914;color:#fff;padding:10px 18px;border-radius:6px;font-size:12px;font-weight:700;letter-spacing:1px;font-family:Arial,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.6);display:flex;align-items:center;gap:10px;max-width:420px;">
     <span style="width:8px;height:8px;background:#fff;border-radius:50%;animation:optiott-pulse 1.5s infinite;flex-shrink:0;"></span>
     <div style="line-height:1.4;">
       <div>LIVE PREVIEW</div>
-      <div style="font-weight:400;font-size:10px;opacity:.85;">${escapeHtml(displayName)} · ${escapeHtml(String(nodeCount))} sections · ${escapeHtml(types)}</div>
+      <div style="font-weight:400;font-size:10px;opacity:.85;">${escapeHtml(displayName)} · ${escapeHtml(line2)}</div>
     </div>
   </div>
   <style>@keyframes optiott-pulse{0%,100%{opacity:1}50%{opacity:.3}}</style>
-  <script>window.__optiottExperienceKey = ${JSON.stringify(key)};</script>`
+  <script>
+    window.__optiottExperienceKey = ${JSON.stringify(key)};
+    window.__optiottDiagnostic = ${JSON.stringify(diagnostic)};
+  </script>`
 }
 
 const CMS_BRIDGE = `
@@ -139,15 +152,18 @@ export async function GET(request: NextRequest) {
   }
 
   let experience: ExperienceData | null = null
+  let diagnostic: FetchExperienceResult['diagnostic'] = { source: 'none', itemsCount: 0 }
   try {
-    experience = await fetchExperienceByKey(key, token)
+    const result = await fetchExperienceByKey(key, token)
+    experience = result.experience
+    diagnostic = result.diagnostic
   } catch (err) {
     return errorPage('Content Graph request failed', String(err))
   }
 
   const top = updateTitle(shell.top, experience)
   const main = renderComposition(experience)
-  const badge = renderHeader(experience, key)
+  const badge = renderHeader(experience, key, diagnostic)
 
   // Assemble: shell top (head + header) + composition + shell bottom (footer + scripts)
   // Inject bridge + badge right before </body> (which lives in shell bottom).

@@ -102,6 +102,11 @@ const COMPONENT_FRAGMENTS = `
   }
 `
 
+// NOTE: `nodes` is only defined on ICompositionStructureNode, not on the
+// base ICompositionNode union. Any access to nested children must be wrapped
+// in `... on ICompositionStructureNode { nodes { ... } }` or the query errors.
+// The SaaS outline layout is flat (component nodes at the root), so we query
+// one level of components plus one optional structure level for forward compat.
 const COMPOSITION_QUERY = `
   query ExperienceByKey($key: String!) {
     _Content(
@@ -135,16 +140,18 @@ const COMPOSITION_QUERY = `
                   ${COMPONENT_FRAGMENTS}
                 }
               }
-              nodes {
-                key
-                displayName
-                nodeType
-                layoutType
-                __typename
-                ... on CompositionComponentNode {
-                  component {
-                    _metadata { types key }
-                    ${COMPONENT_FRAGMENTS}
+              ... on ICompositionStructureNode {
+                nodes {
+                  key
+                  displayName
+                  nodeType
+                  layoutType
+                  __typename
+                  ... on CompositionComponentNode {
+                    component {
+                      _metadata { types key }
+                      ${COMPONENT_FRAGMENTS}
+                    }
                   }
                 }
               }
@@ -190,38 +197,77 @@ export type ExperienceData = {
   composition?: ExperienceComposition
 }
 
+export type FetchExperienceResult = {
+  experience: ExperienceData | null
+  // Populated when the request succeeded at HTTP level but GraphQL returned errors,
+  // or when no items matched, or when no auth was available. Used by /preview to
+  // show a useful error banner instead of silently rendering an empty page.
+  diagnostic: {
+    source: 'single-key' | 'bearer' | 'none'
+    httpStatus?: number
+    errors?: unknown[]
+    itemsCount?: number
+  }
+}
+
 export async function fetchExperienceByKey(
   key: string,
   token?: string
-): Promise<ExperienceData | null> {
+): Promise<FetchExperienceResult> {
   const variables = { key: key.replace(/-/g, '') }
 
-  const runQuery = async (url: string, headers: Record<string, string>) => {
-    try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...headers },
-        body: JSON.stringify({ query: COMPOSITION_QUERY, variables }),
-        cache: 'no-store',
-      })
-      if (!res.ok) return null
-      const data = await res.json()
-      const item = data?.data?._Content?.items?.[0]
-      return (item ?? null) as ExperienceData | null
-    } catch {
-      return null
+  const runQuery = async (
+    url: string,
+    headers: Record<string, string>
+  ): Promise<{ item: ExperienceData | null; httpStatus: number; errors?: unknown[]; itemsCount: number }> => {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...headers },
+      body: JSON.stringify({ query: COMPOSITION_QUERY, variables }),
+      cache: 'no-store',
+    })
+    const httpStatus = res.status
+    if (!res.ok) {
+      return { item: null, httpStatus, errors: [{ message: `HTTP ${httpStatus}` }], itemsCount: 0 }
+    }
+    const data = await res.json()
+    const errors = data?.errors as unknown[] | undefined
+    const items = data?.data?._Content?.items ?? []
+    const item = (items[0] ?? null) as ExperienceData | null
+    return { item, httpStatus, errors, itemsCount: items.length }
+  }
+
+  // Cache-bust the gateway so fresh edits show up (stored=false already bypasses the
+  // durable store, but we add a rolling param to defeat any intermediate CDN cache).
+  const bust = Date.now()
+
+  if (SINGLE_KEY) {
+    const url = `${GATEWAY}?auth=${SINGLE_KEY}&stored=false&_=${bust}`
+    const r = await runQuery(url, {})
+    if (r.item) {
+      return { experience: r.item, diagnostic: { source: 'single-key', httpStatus: r.httpStatus, itemsCount: r.itemsCount } }
+    }
+    // If single-key failed with GraphQL errors, return them so /preview can show a real error.
+    if (r.errors && r.errors.length > 0) {
+      return {
+        experience: null,
+        diagnostic: { source: 'single-key', httpStatus: r.httpStatus, errors: r.errors, itemsCount: r.itemsCount },
+      }
     }
   }
 
-  if (SINGLE_KEY) {
-    const item = await runQuery(`${GATEWAY}?auth=${SINGLE_KEY}&stored=false`, {})
-    if (item) return item
-  }
-
   if (token && token.length > 10) {
-    const item = await runQuery(GATEWAY, { Authorization: `Bearer ${token}` })
-    if (item) return item
+    const r = await runQuery(`${GATEWAY}?_=${bust}`, { Authorization: `Bearer ${token}` })
+    if (r.item) {
+      return { experience: r.item, diagnostic: { source: 'bearer', httpStatus: r.httpStatus, itemsCount: r.itemsCount } }
+    }
+    if (r.errors && r.errors.length > 0) {
+      return {
+        experience: null,
+        diagnostic: { source: 'bearer', httpStatus: r.httpStatus, errors: r.errors, itemsCount: r.itemsCount },
+      }
+    }
   }
 
-  return null
+  return { experience: null, diagnostic: { source: 'none', itemsCount: 0 } }
 }
