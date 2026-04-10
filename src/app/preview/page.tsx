@@ -133,7 +133,10 @@ async function fetchPreviewContent(
 
 export default async function PreviewPage({ searchParams }: PreviewPageProps) {
   const params = await searchParams
-  const key = params.key ?? ''
+  // CMS sends dashed UUID (e.g. 72b8834e-e8da-4a66-8e20-8417ba45bb35)
+  // but Content Graph stores keys without dashes. Normalize here.
+  const rawKey = params.key ?? ''
+  const key = rawKey.replace(/-/g, '')
   const ver = params.ver ?? 'Draft'
   const loc = params.loc ?? 'en'
   const token = params.preview_token ?? ''
