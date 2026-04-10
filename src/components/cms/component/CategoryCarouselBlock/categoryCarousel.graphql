@@ -1,4 +1,0 @@
-fragment CategoryCarousel on CategoryCarouselBlock {
-  sectionTitle: SectionTitle
-  subtitle: Subtitle
-}

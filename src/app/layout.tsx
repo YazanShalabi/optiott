@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import Preloader from "@/components/layout/Preloader";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "OptiOTT - Your Ultimate Streaming Destination",
-  description: "Stream the latest movies, TV shows, and web series on OptiOTT. Powered by Optimizely SaaS CMS.",
+  title: "OptiOTT - OTT Platform and Video Streaming",
+  description: "OptiOTT - Premium OTT Platform and Video Streaming service. Watch movies, TV shows, and web series.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/assets/img/favicon.svg",
   },
 };
 
@@ -24,14 +16,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#0e0e0e] text-white font-sans">
-        <Preloader />
-        <Header />
-        <div className="flex-1">
-          {children}
-        </div>
-        <Footer />
+    <html lang="en">
+      <head>
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/assets/css/all.min.css" />
+        <link rel="stylesheet" href="/assets/css/animate.css" />
+        <link rel="stylesheet" href="/assets/css/magnific-popup.css" />
+        <link rel="stylesheet" href="/assets/css/meanmenu.css" />
+        <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="/assets/css/nice-select.css" />
+        <link rel="stylesheet" href="/assets/css/color.css" />
+        <link rel="stylesheet" href="/assets/css/main.css" />
+      </head>
+      <body>
+        {children}
+        <Script src="/assets/js/jquery-3.7.1.min.js" strategy="beforeInteractive" />
+        <Script src="/assets/js/viewport.jquery.js" strategy="afterInteractive" />
+        <Script src="/assets/js/bootstrap.bundle.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.nice-select.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.waypoints.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.counterup.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/swiper-bundle.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.meanmenu.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/jquery.magnific-popup.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/wow.min.js" strategy="afterInteractive" />
+        <Script src="/assets/js/main.js" strategy="afterInteractive" />
       </body>
     </html>
   );

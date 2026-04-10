@@ -1,5 +1,0 @@
-fragment FaqItem on FaqItemBlock {
-  number: Number
-  question: Question
-  answer: Answer
-}

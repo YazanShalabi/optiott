@@ -1,5 +1,0 @@
-fragment BrandSlider on BrandSliderBlock {
-  _metadata {
-    key
-  }
-}

@@ -1,5 +1,0 @@
-fragment PricingTabs on PricingTabsBlock {
-  _metadata {
-    key
-  }
-}

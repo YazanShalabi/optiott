@@ -1,6 +1,0 @@
-fragment FaqSection on FaqSectionBlock {
-  title: Title
-  description: Description
-  ctaButtonText: CtaButtonText
-  ctaButtonLink: CtaButtonLink
-}

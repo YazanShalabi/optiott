@@ -1,5 +1,0 @@
-fragment CounterItem on CounterItemBlock {
-  number: Number
-  suffix: Suffix
-  label: Label
-}

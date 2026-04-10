@@ -1,4 +1,0 @@
-fragment ProgressBar on ProgressBarBlock {
-  title: Title
-  percentage: Percentage
-}

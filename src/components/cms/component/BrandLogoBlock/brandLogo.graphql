@@ -1,9 +1,0 @@
-fragment BrandLogo on BrandLogoBlock {
-  logoImage: LogoImage {
-    url {
-      default
-    }
-  }
-  altText: AltText
-  linkUrl: LinkUrl
-}

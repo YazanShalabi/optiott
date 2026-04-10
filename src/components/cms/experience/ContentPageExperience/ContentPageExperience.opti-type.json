@@ -1,7 +1,0 @@
-{
-  "key": "ContentPageExperience",
-  "displayName": "Content Page Experience",
-  "description": "The experience layout for content pages.",
-  "baseType": "_experience",
-  "properties": {}
-}
