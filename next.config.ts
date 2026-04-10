@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
+      // CMS preview endpoint alias (matches opti-cinema app's live preview URL format)
+      { source: '/api/preview', destination: '/preview' },
       // Serve the template HTML files for pretty URLs
       { source: '/', destination: '/index.html' },
       { source: '/home', destination: '/index.html' },
