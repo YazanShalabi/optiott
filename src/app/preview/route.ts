@@ -20,10 +20,9 @@ type ContentItem = {
   Description?: string
 }
 
-// Map CMS content type → template HTML file in /public
+// Map CMS content type → template HTML file in /public (legacy page layouts)
 const TEMPLATE_FOR_TYPE: Record<string, string> = {
   HomePage: 'index.html',
-  BlankExperience: 'index.html',
   HomePageExperience: 'index.html',
   AboutPage: 'about.html',
   ContactPage: 'contact.html',
@@ -38,10 +37,63 @@ const TEMPLATE_FOR_TYPE: Record<string, string> = {
   ErrorPage: '404.html',
 }
 
+// Map route segment / display name → template HTML file (for BlankExperience)
+// Since all pages are now BlankExperience, we route by URL slug or display name.
+const TEMPLATE_FOR_SLUG: Record<string, string> = {
+  '': 'index.html',
+  home: 'index.html',
+  about: 'about.html',
+  'about-us': 'about.html',
+  contact: 'contact.html',
+  'contact-us': 'contact.html',
+  pricing: 'pricing.html',
+  team: 'team.html',
+  'our-team': 'team.html',
+  movies: 'movie.html',
+  'movie-details': 'movie-details.html',
+  'tv-shows': 'tv-shows.html',
+  'tv-shows-details': 'tv-shows-details.html',
+  'web-series': 'web-series.html',
+  'web-series-details': 'web-series-details.html',
+  blog: 'news.html',
+  news: 'news.html',
+  'blog-details': 'news-details.html',
+  'news-details': 'news-details.html',
+  'coming-soon': 'cooming-soon.html',
+  login: 'login.html',
+  '404': '404.html',
+}
+
+function pickTemplate(content: ContentItem | null): string {
+  if (!content) return 'index.html'
+
+  // 1) Try legacy page type mapping first
+  const types = content._metadata?.types || []
+  for (const t of types) {
+    if (TEMPLATE_FOR_TYPE[t]) return TEMPLATE_FOR_TYPE[t]
+  }
+
+  // 2) For BlankExperience: derive from URL slug
+  const url = content._metadata?.url?.default || ''
+  // Strip leading/trailing slashes and locale prefix, take last segment
+  const slug = url.replace(/^\/+|\/+$/g, '').replace(/^en\//, '').split('/').pop() || ''
+  if (TEMPLATE_FOR_SLUG[slug]) return TEMPLATE_FOR_SLUG[slug]
+
+  // 3) Fall back to slugified display name
+  const displayName = content._metadata?.displayName || ''
+  const nameSlug = displayName.toLowerCase().replace(/\s+/g, '-')
+  if (TEMPLATE_FOR_SLUG[nameSlug]) return TEMPLATE_FOR_SLUG[nameSlug]
+
+  // 4) Default to home
+  return 'index.html'
+}
+
 async function fetchContent(key: string, token: string): Promise<ContentItem | null> {
   const gateway = process.env.OPTIMIZELY_GRAPH_GATEWAY || 'https://cg.optimizely.com/content/v2'
   const singleKey = process.env.OPTIMIZELY_GRAPH_SINGLE_KEY || ''
 
+  // All pages are now BlankExperience (no type-specific properties yet)
+  // so just fetch metadata.
   const query = `
     query PreviewContent($key: String!) {
       _Content(
@@ -57,17 +109,6 @@ async function fetchContent(key: string, token: string): Promise<ContentItem | n
             displayName
             url { default hierarchical }
           }
-          ... on HomePage { MetaTitle MetaDescription }
-          ... on AboutPage { MetaTitle MetaDescription BreadcrumbTitle }
-          ... on ContactPage { MetaTitle MetaDescription BreadcrumbTitle }
-          ... on PricingPage { MetaTitle MetaDescription BreadcrumbTitle }
-          ... on TeamPage { MetaTitle MetaDescription BreadcrumbTitle }
-          ... on BlogListingPage { MetaTitle MetaDescription BreadcrumbTitle }
-          ... on MovieListingPage { MetaTitle MetaDescription BreadcrumbTitle }
-          ... on ComingSoonPage { MetaTitle Title Description }
-          ... on LoginPage { MetaTitle }
-          ... on ErrorPage { Title Description }
-          ... on BlogDetailPage { MetaTitle }
         }
       }
     }
@@ -163,9 +204,9 @@ export async function GET(request: NextRequest) {
   // Fetch the content (gets the content type so we know which template to use)
   const content = key ? await fetchContent(key, token) : null
 
-  // Pick template based on content type
-  const contentType = content?._metadata?.types?.[0] || 'HomePage'
-  const templateFile = TEMPLATE_FOR_TYPE[contentType] || 'index.html'
+  // Pick template based on content type, URL slug, or display name
+  const templateFile = pickTemplate(content)
+  const contentType = content?._metadata?.types?.[0] || 'Unknown'
 
   // Read the template HTML from /public
   const templatePath = path.join(process.cwd(), 'public', templateFile)
