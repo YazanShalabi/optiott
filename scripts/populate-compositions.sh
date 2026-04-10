@@ -93,6 +93,31 @@ print(json.dumps({'composition': comp}))
 }
 
 ###############################################################################
+# publish_version KEY VERSION
+#
+# Promotes a draft version to published so Content Graph's single-key auth
+# path (which only returns Published content) starts serving it. Without this
+# the public /preview route would keep showing the previous published snapshot
+# even after a successful PATCH.
+###############################################################################
+publish_version() {
+  local key="$1" version="$2"
+  refresh_token
+  local resp http
+  resp=$(curl -s -w '\n%{http_code}' -X PATCH \
+    "$API_BASE/preview3/experimental/content/$key/versions/$version?locale=en" \
+    -H "Authorization: Bearer $TOKEN" \
+    -H "Content-Type: application/merge-patch+json" \
+    -d '{"status":"published"}')
+  http=$(echo "$resp" | tail -n1)
+  if [ "$http" = "200" ] || [ "$http" = "201" ]; then
+    return 0
+  fi
+  echo -e "${YELLOW}  PUBLISH $key v$version -> HTTP $http${NC}" >&2
+  return 1
+}
+
+###############################################################################
 # make_component_node DISPLAY_NAME CONTENT_TYPE PROPS_JSON
 #
 # Emits a JSON object for one composition component node. UUID is generated.
@@ -354,7 +379,11 @@ do_populate() {
     return
   fi
   if patch_composition "$key" "$version" "$comp"; then
-    echo -e "${GREEN}  OK   $name ($key v$version)${NC}"
+    if publish_version "$key" "$version"; then
+      echo -e "${GREEN}  OK   $name ($key v$version) [published]${NC}"
+    else
+      echo -e "${YELLOW}  OK   $name ($key v$version) [patched but publish failed]${NC}"
+    fi
   else
     echo -e "${RED}  FAIL $name ($key v$version)${NC}"
   fi
