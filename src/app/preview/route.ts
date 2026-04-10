@@ -64,6 +64,15 @@ const TEMPLATE_FOR_SLUG: Record<string, string> = {
   '404': '404.html',
 }
 
+// Map parent URL segment → detail template (for BlankExperience children of listing pages)
+const DETAIL_TEMPLATE_FOR_PARENT: Record<string, string> = {
+  movies: 'movie-details.html',
+  'tv-shows': 'tv-shows-details.html',
+  'web-series': 'web-series-details.html',
+  blog: 'news-details.html',
+  news: 'news-details.html',
+}
+
 function pickTemplate(content: ContentItem | null): string {
   if (!content) return 'index.html'
 
@@ -73,10 +82,23 @@ function pickTemplate(content: ContentItem | null): string {
     if (TEMPLATE_FOR_TYPE[t]) return TEMPLATE_FOR_TYPE[t]
   }
 
-  // 2) For BlankExperience: derive from URL slug
+  // 2) For BlankExperience: derive from URL path
   const url = content._metadata?.url?.default || ''
-  // Strip leading/trailing slashes and locale prefix, take last segment
-  const slug = url.replace(/^\/+|\/+$/g, '').replace(/^en\//, '').split('/').pop() || ''
+  // Strip leading/trailing slashes and locale prefix
+  const path = url.replace(/^\/+|\/+$/g, '').replace(/^en\//, '')
+  const segments = path.split('/').filter(Boolean)
+
+  // If 2+ segments, it's a detail page (e.g. movies/the-dark-knight)
+  // Parent segment tells us which detail template to use
+  if (segments.length >= 2) {
+    const parentSlug = segments[segments.length - 2]
+    if (DETAIL_TEMPLATE_FOR_PARENT[parentSlug]) {
+      return DETAIL_TEMPLATE_FOR_PARENT[parentSlug]
+    }
+  }
+
+  // Otherwise, use the last segment as the page slug
+  const slug = segments[segments.length - 1] || ''
   if (TEMPLATE_FOR_SLUG[slug]) return TEMPLATE_FOR_SLUG[slug]
 
   // 3) Fall back to slugified display name
