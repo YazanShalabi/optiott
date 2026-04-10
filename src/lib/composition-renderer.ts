@@ -355,7 +355,12 @@ function renderFaqSectionBlock(node: ComponentNode): string {
               const isDefault = (item as unknown as { _def?: boolean })._def
               const ip = isDefault ? (item as unknown as Props) : getProps(item as ComponentNode)
               const ik = isDefault ? `d${i}` : (item as ComponentNode).key || `i${i}`
-              const num = (ip.Number as string) || String(i + 1).padStart(2, '0')
+              // FaqItemBlock.Number is aliased to FaqNumber in the GraphQL query
+              // (to avoid a conflict with CounterItemBlock.Number which is Int).
+              const num =
+                (ip.FaqNumber as string) ||
+                (ip.Number as string) ||
+                String(i + 1).padStart(2, '0')
               const q = (ip.Question as string) || ''
               const a = (ip.Answer as string) || ''
               return `
@@ -485,7 +490,13 @@ function renderCounterSectionBlock(node: ComponentNode): string {
 function renderCounterItemBlock(node: ComponentNode): string {
   const p = getProps(node)
   const k = node.key
-  const number = p.Number !== undefined && p.Number !== null ? String(p.Number) : '0'
+  // CounterItemBlock.Number is aliased to CounterNumber in the GraphQL query
+  // (to avoid a conflict with FaqItemBlock.Number which is String).
+  const numeric =
+    p.CounterNumber !== undefined && p.CounterNumber !== null
+      ? p.CounterNumber
+      : p.Number
+  const number = numeric !== undefined && numeric !== null ? String(numeric) : '0'
   const suffix = (p.Suffix as string) || ''
   const label = (p.Label as string) || ''
   return `
@@ -545,7 +556,9 @@ function renderContactInfoBlock(node: ComponentNode): string {
   const k = node.key
   const label = (p.Label as string) || ''
   const value = (p.Value as string) || ''
-  const icon = (p.Icon as string) || 'fa-envelope'
+  // ContactInfoBlock.Icon is aliased to ContactIcon in the GraphQL query
+  // (to avoid a conflict with SectionTitleBlock.Icon which is ContentUrl).
+  const icon = (p.ContactIcon as string) || (p.Icon as string) || 'fa-envelope'
   const link = (p.LinkUrl as string) || ''
   const body = `
       <div class="contact-info-icon"><i class="fa-solid ${attr(icon)}"></i></div>

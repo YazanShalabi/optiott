@@ -51,7 +51,8 @@ const COMPONENT_FRAGMENTS = `
     Title Description CtaButtonText CtaButtonLink
   }
   ... on FaqItemBlock {
-    Number Question Answer
+    FaqNumber: Number
+    Question Answer
   }
   ... on NewsletterBlock {
     Title Description Placeholder
@@ -62,7 +63,8 @@ const COMPONENT_FRAGMENTS = `
     MainImage { default }
   }
   ... on CounterItemBlock {
-    Number Suffix Label
+    CounterNumber: Number
+    Suffix Label
   }
   ... on AwardsBlock {
     Title Description Years
@@ -80,7 +82,8 @@ const COMPONENT_FRAGMENTS = `
     Title Description SubmitButtonText FormEndpoint
   }
   ... on ContactInfoBlock {
-    Icon Label Value LinkUrl
+    ContactIcon: Icon
+    Label Value LinkUrl
   }
   ... on MapEmbedBlock {
     EmbedUrl Height
@@ -91,11 +94,11 @@ const COMPONENT_FRAGMENTS = `
   }
   ... on SectionTitleBlock {
     Heading Subtitle Alignment
-    Icon { default }
+    SectionIcon: Icon { default }
   }
   ... on ButtonBlock {
     Label Url Style
-    Icon { default }
+    ButtonIconRef: Icon { default }
   }
   ... on ProgressBarBlock {
     Title Percentage
