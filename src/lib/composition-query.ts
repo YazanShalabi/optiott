@@ -222,7 +222,13 @@ export async function fetchExperienceByKey(
   const runQuery = async (
     url: string,
     headers: Record<string, string>
-  ): Promise<{ item: ExperienceData | null; httpStatus: number; errors?: unknown[]; itemsCount: number }> => {
+  ): Promise<{
+    item: ExperienceData | null
+    httpStatus: number
+    errors?: unknown[]
+    itemsCount: number
+    errorBody?: string
+  }> => {
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...headers },
@@ -231,7 +237,23 @@ export async function fetchExperienceByKey(
     })
     const httpStatus = res.status
     if (!res.ok) {
-      return { item: null, httpStatus, errors: [{ message: `HTTP ${httpStatus}` }], itemsCount: 0 }
+      // Capture body so the diagnostic surfaces the real GraphQL validation error
+      // instead of a bare "HTTP 400".
+      const errorBody = await res.text().catch(() => '')
+      let parsed: unknown[] | undefined
+      try {
+        const j = JSON.parse(errorBody) as { errors?: unknown[] }
+        parsed = j.errors
+      } catch {
+        /* not JSON */
+      }
+      return {
+        item: null,
+        httpStatus,
+        errors: parsed ?? [{ message: `HTTP ${httpStatus}`, body: errorBody.slice(0, 400) }],
+        itemsCount: 0,
+        errorBody,
+      }
     }
     const data = await res.json()
     const errors = data?.errors as unknown[] | undefined
@@ -243,31 +265,59 @@ export async function fetchExperienceByKey(
   // Cache-bust the gateway so fresh edits show up (stored=false already bypasses the
   // durable store, but we add a rolling param to defeat any intermediate CDN cache).
   const bust = Date.now()
+  const hasPreviewToken = !!(token && token.length > 10)
+
+  // Auth priority: when we are inside the CMS preview iframe we receive a
+  // `preview_token` query param. That token is a short-lived bearer that grants
+  // access to DRAFT content. Single-key only sees PUBLISHED content, so for any
+  // in-editor preview (where authors expect unsaved edits to reflect) we must
+  // prefer the bearer path. Single-key is the public fallback for anonymous
+  // previews (e.g. sharing a /preview link outside the CMS).
+  if (hasPreviewToken) {
+    const r = await runQuery(`${GATEWAY}?_=${bust}`, { Authorization: `Bearer ${token}` })
+    if (r.item) {
+      return {
+        experience: r.item,
+        diagnostic: { source: 'bearer', httpStatus: r.httpStatus, itemsCount: r.itemsCount },
+      }
+    }
+    // If bearer returned GraphQL errors, fall through to single-key as a
+    // last-ditch attempt (common during schema drift).
+    if (r.errors && r.errors.length > 0 && !SINGLE_KEY) {
+      return {
+        experience: null,
+        diagnostic: {
+          source: 'bearer',
+          httpStatus: r.httpStatus,
+          errors: r.errors,
+          itemsCount: r.itemsCount,
+        },
+      }
+    }
+  }
 
   if (SINGLE_KEY) {
     const url = `${GATEWAY}?auth=${SINGLE_KEY}&stored=false&_=${bust}`
     const r = await runQuery(url, {})
     if (r.item) {
-      return { experience: r.item, diagnostic: { source: 'single-key', httpStatus: r.httpStatus, itemsCount: r.itemsCount } }
-    }
-    // If single-key failed with GraphQL errors, return them so /preview can show a real error.
-    if (r.errors && r.errors.length > 0) {
       return {
-        experience: null,
-        diagnostic: { source: 'single-key', httpStatus: r.httpStatus, errors: r.errors, itemsCount: r.itemsCount },
+        experience: r.item,
+        diagnostic: {
+          source: hasPreviewToken ? 'bearer' : 'single-key',
+          httpStatus: r.httpStatus,
+          itemsCount: r.itemsCount,
+        },
       }
     }
-  }
-
-  if (token && token.length > 10) {
-    const r = await runQuery(`${GATEWAY}?_=${bust}`, { Authorization: `Bearer ${token}` })
-    if (r.item) {
-      return { experience: r.item, diagnostic: { source: 'bearer', httpStatus: r.httpStatus, itemsCount: r.itemsCount } }
-    }
     if (r.errors && r.errors.length > 0) {
       return {
         experience: null,
-        diagnostic: { source: 'bearer', httpStatus: r.httpStatus, errors: r.errors, itemsCount: r.itemsCount },
+        diagnostic: {
+          source: 'single-key',
+          httpStatus: r.httpStatus,
+          errors: r.errors,
+          itemsCount: r.itemsCount,
+        },
       }
     }
   }

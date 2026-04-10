@@ -100,17 +100,43 @@ const CMS_BRIDGE = `
   <script src="/communicationinjector.js"></script>
   <script>
     (function () {
-      var reload = function () {
+      var lastReload = 0;
+      var reload = function (reason) {
+        var now = Date.now();
+        // Debounce: the CMS often fires multiple events for a single save.
+        if (now - lastReload < 400) return;
+        lastReload = now;
         var url = new URL(window.location.href);
-        url.searchParams.set('_t', String(Date.now()));
+        url.searchParams.set('_t', String(now));
+        console.log('[optiott-preview] reload:', reason || 'unknown');
         window.location.replace(url.toString());
       };
-      window.addEventListener('optimizely:cms:contentSaved', function () {
-        setTimeout(reload, 600);
+      // DOM events dispatched by communicationinjector.js
+      var domEvents = [
+        'optimizely:cms:contentSaved',
+        'contentSaved',
+        'epi:contentSaved',
+        'optimizely:cms:contentUpdated',
+        'contentUpdated',
+      ];
+      domEvents.forEach(function (name) {
+        window.addEventListener(name, function () { setTimeout(function () { reload(name); }, 350); });
       });
-      // Some CMS builds emit these instead.
-      window.addEventListener('contentSaved', function () { setTimeout(reload, 600); });
-      window.addEventListener('epi:contentSaved', function () { setTimeout(reload, 600); });
+      // postMessage events from the CMS parent (Visual Builder edit iframe protocol)
+      window.addEventListener('message', function (ev) {
+        var d = ev && ev.data;
+        if (!d || typeof d !== 'object') return;
+        var t = d.type || d.eventName || d.event || '';
+        if (typeof t !== 'string') return;
+        if (
+          t.indexOf('contentSaved') !== -1 ||
+          t.indexOf('contentUpdated') !== -1 ||
+          t === 'optimizely:cms:contentSaved' ||
+          t === 'cms:contentSaved'
+        ) {
+          setTimeout(function () { reload('postMessage:' + t); }, 350);
+        }
+      });
     })();
   </script>`
 
