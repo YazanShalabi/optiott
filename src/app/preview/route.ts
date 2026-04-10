@@ -1,166 +1,52 @@
+/**
+ * Visual Builder live-preview route.
+ *
+ * Fetches the experience composition from Content Graph and renders it into
+ * the WowTube template shell. Every editable field carries a data-epi-edit
+ * attribute so Optimizely's on-page editor can target it, and the page reloads
+ * on `optimizely:cms:contentSaved` so authors see changes immediately.
+ */
+
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { NextRequest } from 'next/server'
+import { fetchExperienceByKey, type ExperienceData } from '@/lib/composition-query'
+import { renderComposition } from '@/lib/composition-renderer'
 
 export const dynamic = 'force-dynamic'
 export const fetchCache = 'force-no-store'
 
-type ContentItem = {
-  _metadata?: {
-    key?: string
-    version?: string
-    types?: string[]
-    displayName?: string
-    url?: { default?: string; hierarchical?: string }
-  }
-  MetaTitle?: string
-  MetaDescription?: string
-  BreadcrumbTitle?: string
-  Title?: string
-  Description?: string
-}
+// Markers in public/index.html that delimit the authorable main-content region.
+// Everything before MAIN_START (head, offcanvas, header, search bar) is preserved
+// as the "shell top". Everything from MAIN_END onward (footer, scripts) is
+// preserved as the "shell bottom". The composition is injected in between.
+const MAIN_START = '<!-- Hero Section Start -->'
+const MAIN_END = '<!-- Footer Section Start -->'
 
-// Map CMS content type → template HTML file in /public (legacy page layouts)
-const TEMPLATE_FOR_TYPE: Record<string, string> = {
-  HomePage: 'index.html',
-  HomePageExperience: 'index.html',
-  AboutPage: 'about.html',
-  ContactPage: 'contact.html',
-  PricingPage: 'pricing.html',
-  TeamPage: 'team.html',
-  BlogListingPage: 'news.html',
-  BlogDetailPage: 'news-details.html',
-  MovieListingPage: 'movie.html',
-  ContentDetailPage: 'movie-details.html',
-  ComingSoonPage: 'cooming-soon.html',
-  LoginPage: 'login.html',
-  ErrorPage: '404.html',
-}
+type Shell = { top: string; bottom: string }
+let cachedShell: Shell | null = null
 
-// Map route segment / display name → template HTML file (for BlankExperience)
-// Since all pages are now BlankExperience, we route by URL slug or display name.
-const TEMPLATE_FOR_SLUG: Record<string, string> = {
-  '': 'index.html',
-  home: 'index.html',
-  about: 'about.html',
-  'about-us': 'about.html',
-  contact: 'contact.html',
-  'contact-us': 'contact.html',
-  pricing: 'pricing.html',
-  team: 'team.html',
-  'our-team': 'team.html',
-  movies: 'movie.html',
-  'movie-details': 'movie-details.html',
-  'tv-shows': 'tv-shows.html',
-  'tv-shows-details': 'tv-shows-details.html',
-  'web-series': 'web-series.html',
-  'web-series-details': 'web-series-details.html',
-  blog: 'news.html',
-  news: 'news.html',
-  'blog-details': 'news-details.html',
-  'news-details': 'news-details.html',
-  'coming-soon': 'cooming-soon.html',
-  login: 'login.html',
-  '404': '404.html',
-}
-
-// Map parent URL segment → detail template (for BlankExperience children of listing pages)
-const DETAIL_TEMPLATE_FOR_PARENT: Record<string, string> = {
-  movies: 'movie-details.html',
-  'tv-shows': 'tv-shows-details.html',
-  'web-series': 'web-series-details.html',
-  blog: 'news-details.html',
-  news: 'news-details.html',
-}
-
-function pickTemplate(content: ContentItem | null): string {
-  if (!content) return 'index.html'
-
-  // 1) Try legacy page type mapping first
-  const types = content._metadata?.types || []
-  for (const t of types) {
-    if (TEMPLATE_FOR_TYPE[t]) return TEMPLATE_FOR_TYPE[t]
-  }
-
-  // 2) For BlankExperience: derive from URL path
-  const url = content._metadata?.url?.default || ''
-  // Strip leading/trailing slashes and locale prefix
-  const path = url.replace(/^\/+|\/+$/g, '').replace(/^en\//, '')
-  const segments = path.split('/').filter(Boolean)
-
-  // If 2+ segments, it's a detail page (e.g. movies/the-dark-knight)
-  // Parent segment tells us which detail template to use
-  if (segments.length >= 2) {
-    const parentSlug = segments[segments.length - 2]
-    if (DETAIL_TEMPLATE_FOR_PARENT[parentSlug]) {
-      return DETAIL_TEMPLATE_FOR_PARENT[parentSlug]
+async function loadShell(): Promise<Shell> {
+  if (cachedShell) return cachedShell
+  const templatePath = path.join(process.cwd(), 'public', 'index.html')
+  const html = await readFile(templatePath, 'utf-8')
+  const startIdx = html.indexOf(MAIN_START)
+  const endIdx = html.indexOf(MAIN_END)
+  if (startIdx === -1 || endIdx === -1) {
+    // Fallback: split at </header> … <footer
+    const headerEnd = html.indexOf('</header>')
+    const footerStart = html.indexOf('<footer')
+    cachedShell = {
+      top: html.slice(0, headerEnd === -1 ? 0 : headerEnd + '</header>'.length),
+      bottom: html.slice(footerStart === -1 ? html.length : footerStart),
     }
+    return cachedShell
   }
-
-  // Otherwise, use the last segment as the page slug
-  const slug = segments[segments.length - 1] || ''
-  if (TEMPLATE_FOR_SLUG[slug]) return TEMPLATE_FOR_SLUG[slug]
-
-  // 3) Fall back to slugified display name
-  const displayName = content._metadata?.displayName || ''
-  const nameSlug = displayName.toLowerCase().replace(/\s+/g, '-')
-  if (TEMPLATE_FOR_SLUG[nameSlug]) return TEMPLATE_FOR_SLUG[nameSlug]
-
-  // 4) Default to home
-  return 'index.html'
-}
-
-async function fetchContent(key: string, token: string): Promise<ContentItem | null> {
-  const gateway = process.env.OPTIMIZELY_GRAPH_GATEWAY || 'https://cg.optimizely.com/content/v2'
-  const singleKey = process.env.OPTIMIZELY_GRAPH_SINGLE_KEY || ''
-
-  // All pages are now BlankExperience (no type-specific properties yet)
-  // so just fetch metadata.
-  const query = `
-    query PreviewContent($key: String!) {
-      _Content(
-        where: { _metadata: { key: { eq: $key } } }
-        variation: { include: ALL }
-        limit: 1
-      ) {
-        items {
-          _metadata {
-            key
-            version
-            types
-            displayName
-            url { default hierarchical }
-          }
-        }
-      }
-    }
-  `
-
-  async function runQuery(url: string, headers: Record<string, string>) {
-    try {
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...headers },
-        body: JSON.stringify({ query, variables: { key } }),
-        cache: 'no-store',
-      })
-      if (!res.ok) return null
-      const data = await res.json()
-      return data?.data?._Content?.items?.[0] ?? null
-    } catch {
-      return null
-    }
+  cachedShell = {
+    top: html.slice(0, startIdx),
+    bottom: html.slice(endIdx),
   }
-
-  if (singleKey) {
-    const item = await runQuery(`${gateway}?auth=${singleKey}&stored=false`, {})
-    if (item) return item
-  }
-  if (token && token.length > 10) {
-    const item = await runQuery(gateway, { Authorization: `Bearer ${token}` })
-    if (item) return item
-  }
-  return null
+  return cachedShell
 }
 
 function escapeHtml(s: string): string {
@@ -172,49 +58,67 @@ function escapeHtml(s: string): string {
     .replace(/'/g, '&#39;')
 }
 
-function injectIntoTemplate(html: string, content: ContentItem | null): string {
-  if (!content) return html
+function updateTitle(top: string, experience: ExperienceData | null): string {
+  const displayName = experience?._metadata?.displayName
+  if (!displayName) return top
+  return top.replace(
+    /<title>[^<]*<\/title>/i,
+    `<title>${escapeHtml(displayName)} — OptiOTT</title>`
+  )
+}
 
-  const metaTitle = content.MetaTitle || content._metadata?.displayName || ''
-  const metaDescription = content.MetaDescription || ''
-  const breadcrumbTitle = content.BreadcrumbTitle || content._metadata?.displayName || ''
-
-  if (metaTitle) {
-    html = html.replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(metaTitle)}</title>`)
-  }
-
-  if (metaDescription) {
-    html = html.replace(
-      /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
-      `<meta name="description" content="${escapeHtml(metaDescription)}">`
-    )
-  }
-
-  if (breadcrumbTitle) {
-    // Try common breadcrumb title patterns in the template
-    html = html.replace(
-      /(<div class="breadcrumb-content[^"]*"[^>]*>\s*<h1[^>]*>)[^<]*(<\/h1>)/i,
-      `$1${escapeHtml(breadcrumbTitle)}$2`
-    )
-  }
-
-  // Inject live-preview badge + CMS communication bridge before </body>
-  const badge = `
-    <div id="optiott-live-preview-badge" style="position:fixed;top:20px;right:20px;z-index:99999;background:#e50914;color:#fff;padding:8px 16px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:1px;font-family:Arial,sans-serif;box-shadow:0 4px 12px rgba(0,0,0,.5);display:flex;align-items:center;gap:8px">
-      <span style="width:8px;height:8px;background:#fff;border-radius:50%;animation:optiott-pulse 1.5s infinite"></span>
-      LIVE PREVIEW
+function renderHeader(experience: ExperienceData | null, key: string): string {
+  const displayName = experience?._metadata?.displayName || '(no experience)'
+  const types = experience?._metadata?.types?.join(', ') || 'Unknown'
+  const nodeCount = experience?.composition?.nodes?.length ?? 0
+  return `
+  <div id="optiott-live-preview-badge" style="position:fixed;top:20px;right:20px;z-index:99999;background:#e50914;color:#fff;padding:10px 18px;border-radius:6px;font-size:12px;font-weight:700;letter-spacing:1px;font-family:Arial,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.6);display:flex;align-items:center;gap:10px;max-width:360px;">
+    <span style="width:8px;height:8px;background:#fff;border-radius:50%;animation:optiott-pulse 1.5s infinite;flex-shrink:0;"></span>
+    <div style="line-height:1.4;">
+      <div>LIVE PREVIEW</div>
+      <div style="font-weight:400;font-size:10px;opacity:.85;">${escapeHtml(displayName)} · ${escapeHtml(String(nodeCount))} sections · ${escapeHtml(types)}</div>
     </div>
-    <style>@keyframes optiott-pulse{0%,100%{opacity:1}50%{opacity:.3}}</style>
-    <script src="/communicationinjector.js"></script>
-    <script>
-      window.addEventListener('optimizely:cms:contentSaved', function() {
-        setTimeout(function() { window.location.reload(); }, 750);
-      });
-    </script>
-  `
-  html = html.replace('</body>', `${badge}</body>`)
+  </div>
+  <style>@keyframes optiott-pulse{0%,100%{opacity:1}50%{opacity:.3}}</style>
+  <script>window.__optiottExperienceKey = ${JSON.stringify(key)};</script>`
+}
 
-  return html
+const CMS_BRIDGE = `
+  <script src="/communicationinjector.js"></script>
+  <script>
+    (function () {
+      var reload = function () {
+        var url = new URL(window.location.href);
+        url.searchParams.set('_t', String(Date.now()));
+        window.location.replace(url.toString());
+      };
+      window.addEventListener('optimizely:cms:contentSaved', function () {
+        setTimeout(reload, 600);
+      });
+      // Some CMS builds emit these instead.
+      window.addEventListener('contentSaved', function () { setTimeout(reload, 600); });
+      window.addEventListener('epi:contentSaved', function () { setTimeout(reload, 600); });
+    })();
+  </script>`
+
+function errorPage(message: string, detail: string): Response {
+  const html = `<!DOCTYPE html>
+<html><head><title>Preview Error</title><meta charset="utf-8"></head>
+<body style="background:#0e0e0e;color:#fff;font-family:Arial,sans-serif;padding:40px;">
+  <h1 style="color:#e50914;">Preview Error</h1>
+  <p>${escapeHtml(message)}</p>
+  <pre style="background:#1a1a1a;padding:16px;border-radius:6px;overflow:auto;font-size:12px;">${escapeHtml(detail)}</pre>
+</body></html>`
+  return new Response(html, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'X-Frame-Options': 'ALLOWALL',
+      'Content-Security-Policy':
+        "frame-ancestors 'self' https://*.cms.optimizely.com https://*.optimizely.com",
+    },
+  })
 }
 
 export async function GET(request: NextRequest) {
@@ -223,42 +127,52 @@ export async function GET(request: NextRequest) {
   const key = rawKey.replace(/-/g, '')
   const token = params.get('preview_token') ?? ''
 
-  // Fetch the content (gets the content type so we know which template to use)
-  const content = key ? await fetchContent(key, token) : null
-
-  // Pick template based on content type, URL slug, or display name
-  const templateFile = pickTemplate(content)
-  const contentType = content?._metadata?.types?.[0] || 'Unknown'
-
-  // Read the template HTML from /public
-  const templatePath = path.join(process.cwd(), 'public', templateFile)
-  let html: string
-  try {
-    html = await readFile(templatePath, 'utf-8')
-  } catch {
-    return new Response(
-      `<!DOCTYPE html><html><head><title>Preview Error</title></head><body style="background:#0e0e0e;color:#fff;font-family:sans-serif;padding:40px"><h1>Preview</h1><p>Template not found: ${escapeHtml(templateFile)}</p><p>Content type: ${escapeHtml(contentType)}</p><p>Key: ${escapeHtml(key)}</p></body></html>`,
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'no-store',
-        },
-      }
-    )
+  if (!key) {
+    return errorPage('Missing key parameter', 'Expected ?key=<experienceKey>')
   }
 
-  // Inject CMS content into the template
-  html = injectIntoTemplate(html, content)
+  let shell: Shell
+  try {
+    shell = await loadShell()
+  } catch (err) {
+    return errorPage('Could not load template shell (public/index.html)', String(err))
+  }
+
+  let experience: ExperienceData | null = null
+  try {
+    experience = await fetchExperienceByKey(key, token)
+  } catch (err) {
+    return errorPage('Content Graph request failed', String(err))
+  }
+
+  const top = updateTitle(shell.top, experience)
+  const main = renderComposition(experience)
+  const badge = renderHeader(experience, key)
+
+  // Assemble: shell top (head + header) + composition + shell bottom (footer + scripts)
+  // Inject bridge + badge right before </body> (which lives in shell bottom).
+  let bottom = shell.bottom
+  const bodyClose = bottom.lastIndexOf('</body>')
+  if (bodyClose !== -1) {
+    bottom =
+      bottom.slice(0, bodyClose) +
+      badge +
+      CMS_BRIDGE +
+      bottom.slice(bodyClose)
+  } else {
+    bottom += badge + CMS_BRIDGE
+  }
+
+  const html = top + main + bottom
 
   return new Response(html, {
     status: 200,
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'no-store',
-      // Allow embedding in the Optimizely CMS iframe
       'X-Frame-Options': 'ALLOWALL',
-      'Content-Security-Policy': "frame-ancestors 'self' https://*.cms.optimizely.com https://*.optimizely.com",
+      'Content-Security-Policy':
+        "frame-ancestors 'self' https://*.cms.optimizely.com https://*.optimizely.com",
     },
   })
 }
